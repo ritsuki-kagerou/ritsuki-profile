@@ -1,0 +1,152 @@
+/* ------------------------------------------------------------------
+   CRT terminal — global shell
+   Single-look, dark-only by design. Phosphor green on black.
+   ------------------------------------------------------------------ */
+
+:root {
+	--bg: #000000;
+	--phos: #4ade80;
+	--phos-hot: #d5ffe6;
+	--phos-mid: rgba(74, 222, 128, 0.62);
+	--phos-dim: rgba(74, 222, 128, 0.4);
+	--phos-faint: rgba(74, 222, 128, 0.16);
+	--bar: #1ee07c;
+	--amber: #fbbf24;
+	--alert: #ff5f45;
+	--rule: rgba(74, 222, 128, 0.26);
+	--glow-s: 0 0 3px rgba(74, 222, 128, 0.5);
+	--glow-m: 0 0 4px rgba(74, 222, 128, 0.55), 0 0 16px rgba(74, 222, 128, 0.18);
+
+	--mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	--display: 'Martian Mono', var(--mono);
+
+	/* --- @ritsuki.kagerou/crt-ui ----------------------------------------
+	   The library reads --crt-* tokens; this palette stays the single
+	   source of truth and is mapped onto them here. */
+	--crt-bg: var(--bg);
+	--crt-phos: var(--phos);
+	--crt-phos-hot: var(--phos-hot);
+	--crt-phos-mid: var(--phos-mid);
+	--crt-phos-dim: var(--phos-dim);
+	--crt-phos-faint: var(--phos-faint);
+	--crt-bar: var(--bar);
+	--crt-rule: var(--rule);
+	--crt-mono: var(--mono);
+	--crt-display: var(--display);
+
+	--shell: min(1160px, 92vw);
+	--gut: clamp(1rem, 4vw, 2rem);
+	--fs: clamp(12px, 0.55vw + 10px, 14px);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--bg);
+}
+
+body {
+	margin: 0;
+	min-height: 100dvh;
+	background: var(--bg);
+	color: var(--phos);
+	font-family: var(--mono);
+	font-size: var(--fs);
+	line-height: 1.65;
+	letter-spacing: 0.02em;
+	font-variant-ligatures: none;
+	text-shadow: var(--glow-s);
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+::selection {
+	background: var(--bar);
+	color: #041b0d;
+	text-shadow: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	font: inherit;
+	letter-spacing: inherit;
+	color: inherit;
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	cursor: pointer;
+	text-shadow: inherit;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+	margin: 0;
+	padding: 0;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+:focus-visible {
+	outline: 1px solid var(--phos);
+	outline-offset: 2px;
+}
+
+/* --- shared terminal atoms ------------------------------------------ */
+
+.u-dim {
+	color: var(--phos-dim);
+}
+.u-mid {
+	color: var(--phos-mid);
+}
+.u-hot {
+	color: var(--phos-hot);
+	text-shadow: 0 0 6px rgba(213, 255, 230, 0.6);
+}
+.u-amber {
+	color: var(--amber);
+	text-shadow: 0 0 4px rgba(251, 191, 36, 0.45);
+}
+.u-alert {
+	color: var(--alert);
+	text-shadow: 0 0 4px rgba(255, 95, 69, 0.5);
+}
+
+.u-label {
+	font-family: var(--display);
+	font-weight: 700;
+	font-size: 0.82em;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.u-rule {
+	height: 1px;
+	border: 0;
+	margin: 0;
+	background: linear-gradient(90deg, var(--rule), rgba(74, 222, 128, 0.06));
+}
+
+.u-shell {
+	width: var(--shell);
+	margin-inline: auto;
+	padding-block: clamp(1.5rem, 4vh, 2.75rem) 4rem;
+}
