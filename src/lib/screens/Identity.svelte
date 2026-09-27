@@ -5,16 +5,31 @@
 </script>
 
 <div class="id">
-	<div class="id__records">
-		{#each IDENTITY.records as rec, i (rec.key)}
-			<div class="rec">
-				<span class="rec__key u-dim">{rec.key}</span>
-				<span class="rec__dots"></span>
-				<span class="rec__val" class:rec__val--ok={rec.tone === 'ok'}>
-					<Typed text={rec.value} speed={16} delay={120 + i * 90} ontick={audio.type} />
-				</span>
+	<div class="id__side">
+		<figure class="portrait">
+			<div class="portrait__tube">
+				<img
+					src={IDENTITY.portrait.src}
+					alt={IDENTITY.portrait.alt}
+					width="640"
+					height="640"
+					loading="lazy"
+				/>
 			</div>
-		{/each}
+			<figcaption class="u-label u-dim">{IDENTITY.portrait.label}</figcaption>
+		</figure>
+
+		<div class="id__records">
+			{#each IDENTITY.records as rec, i (rec.key)}
+				<div class="rec">
+					<span class="rec__key u-dim">{rec.key}</span>
+					<span class="rec__dots"></span>
+					<span class="rec__val" class:rec__val--ok={rec.tone === 'ok'}>
+						<Typed text={rec.value} speed={16} delay={120 + i * 90} ontick={audio.type} />
+					</span>
+				</div>
+			{/each}
+		</div>
 	</div>
 
 	<div class="id__body">
@@ -42,6 +57,51 @@
 		grid-template-columns: minmax(240px, 22rem) minmax(0, 1fr);
 		gap: clamp(1.5rem, 5vw, 3.5rem);
 		align-items: start;
+	}
+
+	.id__side {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.portrait {
+		display: grid;
+		gap: 0.5rem;
+		margin: 0;
+	}
+
+	.portrait__tube {
+		position: relative;
+		aspect-ratio: 1;
+		border: 1px solid var(--rule);
+		background: var(--bg);
+		overflow: hidden;
+	}
+
+	.portrait__tube img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		filter: grayscale(1) contrast(1.35) brightness(1.25);
+		transition: filter 240ms ease;
+	}
+
+	.portrait__tube::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: var(--phos);
+		mix-blend-mode: multiply;
+		pointer-events: none;
+		transition: opacity 240ms ease;
+	}
+
+	.portrait:hover .portrait__tube img {
+		filter: none;
+	}
+
+	.portrait:hover .portrait__tube::after {
+		opacity: 0;
 	}
 
 	.id__records {
@@ -138,11 +198,20 @@
 		.id {
 			grid-template-columns: minmax(0, 1fr);
 		}
+
+		.portrait {
+			max-width: 14rem;
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.id__marker {
 			animation: none;
+		}
+
+		.portrait__tube img,
+		.portrait__tube::after {
+			transition: none;
 		}
 	}
 </style>

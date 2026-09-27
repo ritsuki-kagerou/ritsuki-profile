@@ -1,3 +1,5 @@
+import portrait from '$lib/assets/portrait.webp';
+
 export const PROFILE = {
 	name: 'Ritsuki',
 	role: 'Full stack developer',
@@ -58,6 +60,11 @@ export const BOOT_LINES = [
 
 export const IDENTITY = {
 	title: 'IDENTITY',
+	portrait: {
+		src: portrait,
+		alt: `${PROFILE.name}'s avatar: an anime character with dark blue hair and wolf ears, looking back over one shoulder.`,
+		label: 'OPERATOR IMAGE'
+	},
 	records: [
 		{ key: 'DESIGNATION', value: NAME },
 		{ key: 'ROLE', value: PROFILE.role.toUpperCase() },
