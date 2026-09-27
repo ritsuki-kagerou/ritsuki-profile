@@ -46,7 +46,7 @@
 		content: attr(data-text);
 		position: absolute;
 		inset: 0;
-		color: rgba(255, 140, 110, 0.26);
+		color: var(--mark-fringe);
 		translate: -2px 0;
 		mix-blend-mode: screen;
 		pointer-events: none;

@@ -139,8 +139,8 @@
 	}
 
 	.rec__val--ok {
-		color: var(--amber);
-		text-shadow: 0 0 4px color-mix(in srgb, var(--amber) 45%, transparent);
+		color: var(--accent);
+		text-shadow: 0 0 4px color-mix(in srgb, var(--accent) 45%, transparent);
 	}
 
 	.id__body {

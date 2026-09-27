@@ -6,6 +6,7 @@
 	import { SYSTEM, UI } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
+	import { theme } from '$lib/theme.svelte';
 	import Wordmark from './Wordmark.svelte';
 
 	let hint = $state(false);
@@ -26,17 +27,29 @@
 	</div>
 	<div class="head__meta">
 		<p class="head__manifest u-dim">{SYSTEM.manifest}</p>
-		<button
-			class="head__audio"
-			class:head__audio--on={audio.enabled}
-			class:u-beacon={hint && !audio.enabled}
-			style:--beacon-delay="1.2s"
-			aria-pressed={audio.enabled}
-			onclick={() => audio.toggle()}
-		>
-			<span class="u-dim">[S]</span>
-			{UI.speaker.label}: {audio.enabled ? UI.speaker.on : UI.speaker.off}
-		</button>
+		<div class="head__controls">
+			<button
+				class="head__ctl"
+				onclick={() => {
+					theme.cycle();
+					audio.select();
+				}}
+			>
+				<span class="u-dim">[T]</span>
+				{UI.theme.label}: {UI.theme.names[theme.current]}
+			</button>
+			<button
+				class="head__ctl head__audio"
+				class:head__audio--on={audio.enabled}
+				class:u-beacon={hint && !audio.enabled}
+				style:--beacon-delay="1.2s"
+				aria-pressed={audio.enabled}
+				onclick={() => audio.toggle()}
+			>
+				<span class="u-dim">[S]</span>
+				{UI.speaker.label}: {audio.enabled ? UI.speaker.on : UI.speaker.off}
+			</button>
+		</div>
 	</div>
 	<hr class="u-rule" />
 </header>
@@ -80,14 +93,20 @@
 		letter-spacing: 0.12em;
 	}
 
-	.head__audio {
+	.head__controls {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem 1.5rem;
+	}
+
+	.head__ctl {
 		font-size: 0.88em;
 		letter-spacing: 0.16em;
 		color: var(--phos-mid);
 		transition: color 120ms linear;
 	}
 
-	.head__audio:hover {
+	.head__ctl:hover {
 		color: var(--phos-hot);
 	}
 

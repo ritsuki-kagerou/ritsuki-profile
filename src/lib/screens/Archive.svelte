@@ -66,7 +66,7 @@
 				</div>
 				<div class="side__block">
 					<h3 class="u-label u-dim">{UI.archive.status}</h3>
-					<p class:u-amber={entry.status === 'ACTIVE'} class:u-hot={entry.status !== 'ACTIVE'}>
+					<p class:u-accent={entry.status === 'ACTIVE'} class:u-hot={entry.status !== 'ACTIVE'}>
 						[{entry.status}]
 					</p>
 				</div>

@@ -147,3 +147,37 @@ test('the speaker beacon stops once the speaker is on', async ({ page }) => {
 	await page.keyboard.press('s');
 	await expect(page.locator('.head__audio')).not.toHaveClass(/u-beacon/);
 });
+
+test('theme: green by default, T cycles, remembered before first paint', async ({ page }) => {
+	const messages = watchConsole(page);
+	const attr = () => page.evaluate(() => document.documentElement.dataset.theme ?? 'green');
+	const phos = () =>
+		page.evaluate(() =>
+			getComputedStyle(document.documentElement).getPropertyValue('--phos').trim()
+		);
+
+	await page.goto('/?screen=menu');
+	const toggle = page.getByRole('button', { name: /THEME:/ });
+	await expect(toggle).toContainText('GREEN');
+	expect(await attr()).toBe('green');
+	expect(await phos()).toBe('#4ade80');
+
+	await page.keyboard.press('t');
+	await expect(toggle).toContainText('AMBER');
+	expect(await attr()).toBe('amber');
+	expect(await phos()).toBe('#ffb000');
+
+	// applied by the inline script in app.html, before the app hydrates
+	await page.reload({ waitUntil: 'domcontentloaded' });
+	expect(await attr()).toBe('amber');
+	await expect(toggle).toContainText('AMBER');
+
+	await toggle.click();
+	await expect(toggle).toContainText('WHITE');
+	await page.keyboard.press('t');
+	await expect(toggle).toContainText('GREEN');
+	expect(await attr()).toBe('green');
+	expect(await page.evaluate(() => localStorage.getItem('rkos.theme'))).toBeNull();
+
+	expect(messages).toEqual([]);
+});

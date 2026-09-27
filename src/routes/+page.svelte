@@ -5,6 +5,7 @@
 	import { BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
 	import { Boot, ScreenFrame, Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
+	import { theme } from '$lib/theme.svelte';
 
 	import Header from '$lib/components/Header.svelte';
 	import Menu from '$lib/components/Menu.svelte';
@@ -31,6 +32,7 @@
 	// speaker is off; a remembered "on" is applied a tick later.
 	$effect(() => {
 		audio.restore();
+		theme.restore();
 	});
 
 	// Keyboard and mouse both move the cursor, so it lives here, not in Menu.
@@ -86,6 +88,13 @@
 		if (key === 's' || key === 'S') {
 			event.preventDefault();
 			audio.toggle();
+			return;
+		}
+
+		if (key === 't' || key === 'T') {
+			event.preventDefault();
+			theme.cycle();
+			audio.select();
 			return;
 		}
 

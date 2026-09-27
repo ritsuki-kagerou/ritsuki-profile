@@ -377,6 +377,10 @@ export const UI = {
 		enabled: 'ENABLED — [S]',
 		muted: 'MUTED — [S]'
 	},
+	theme: {
+		label: 'THEME',
+		names: { amber: 'AMBER', green: 'GREEN', white: 'WHITE' }
+	},
 	capabilities: { toolchain: 'SUBSYSTEMS' },
 	archive: {
 		metrics: 'METRICS',
