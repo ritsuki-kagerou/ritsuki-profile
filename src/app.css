@@ -150,3 +150,29 @@ ol {
 	margin-inline: auto;
 	padding-block: clamp(1.5rem, 4vh, 2.75rem) 4rem;
 }
+
+/* A few inverted blinks to say "this is here", then nothing. Finite on
+   purpose: a hint that keeps blinking stops being a hint and becomes noise.
+   The box-shadow widens the block without moving the layout; children blink
+   with it so a dimmed part (like [S]) does not vanish into the bar. */
+.u-beacon,
+.u-beacon > * {
+	animation: beacon 700ms steps(1, end) var(--beacon-delay, 1s) 3;
+}
+
+@keyframes beacon {
+	0%,
+	49% {
+		color: var(--bg);
+		background: var(--bar);
+		box-shadow: 0 0 0 0.3em var(--bar);
+		text-shadow: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.u-beacon,
+	.u-beacon > * {
+		animation: none;
+	}
+}

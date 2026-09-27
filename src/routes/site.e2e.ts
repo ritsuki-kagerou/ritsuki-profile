@@ -89,6 +89,11 @@ test.describe('reduced motion', () => {
 		await expect(page.locator('.crt__flicker')).toHaveCSS('animation-name', 'none');
 		await expect(page.locator('.crt-caret:not(.crt-caret--blink)')).toHaveCount(0);
 	});
+
+	test('beacons do not blink', async ({ page }) => {
+		await page.goto('/?screen=menu');
+		await expect(page.locator('.head__audio')).toHaveCSS('animation-name', 'none');
+	});
 });
 
 test('speaker: muted until asked, then remembered', async ({ page }) => {
@@ -105,4 +110,40 @@ test('speaker: muted until asked, then remembered', async ({ page }) => {
 	await expect(toggle).toHaveAttribute('aria-pressed', 'true');
 
 	expect(messages).toEqual([]);
+});
+
+test('beacons blink a few times, then stop', async ({ page }) => {
+	const beacon = (selector: string) =>
+		page.evaluate(
+			(selector) =>
+				document
+					.querySelector(selector)
+					?.getAnimations()
+					.filter((a) => (a as CSSAnimation).animationName === 'beacon')
+					.map((a) => a.playState)
+					.join(',') || 'none',
+			selector
+		);
+
+	await page.goto('/?screen=menu');
+	const toggle = page.locator('.head__audio');
+	await expect(toggle).toHaveClass(/u-beacon/);
+	expect(await beacon('.head__audio')).toBe('running');
+	await expect.poll(() => beacon('.head__audio'), { timeout: 6_000 }).toBe('none');
+
+	// once per page load: coming back to the menu does not blink again
+	await page.keyboard.press('1');
+	await page.keyboard.press('Escape');
+	await expect(page).toHaveURL(/screen=menu/);
+	await expect(toggle).not.toHaveClass(/u-beacon/);
+
+	await page.goto('/?screen=archive&entry=crt-ui');
+	await expect(page.locator('.side__link')).toHaveClass(/u-beacon/);
+	await expect.poll(() => beacon('.side__link'), { timeout: 6_000 }).toBe('none');
+});
+
+test('the speaker beacon stops once the speaker is on', async ({ page }) => {
+	await page.goto('/?screen=menu');
+	await page.keyboard.press('s');
+	await expect(page.locator('.head__audio')).not.toHaveClass(/u-beacon/);
 });

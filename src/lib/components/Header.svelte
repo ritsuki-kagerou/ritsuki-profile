@@ -1,8 +1,20 @@
+<script lang="ts" module>
+	let hinted = false;
+</script>
+
 <script lang="ts">
 	import { SYSTEM, UI } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
 	import Wordmark from './Wordmark.svelte';
+
+	let hint = $state(false);
+
+	$effect(() => {
+		if (hinted) return;
+		hinted = true;
+		hint = true;
+	});
 </script>
 
 <header class="head">
@@ -17,6 +29,8 @@
 		<button
 			class="head__audio"
 			class:head__audio--on={audio.enabled}
+			class:u-beacon={hint && !audio.enabled}
+			style:--beacon-delay="1.2s"
 			aria-pressed={audio.enabled}
 			onclick={() => audio.toggle()}
 		>

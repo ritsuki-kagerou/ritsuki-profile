@@ -74,7 +74,13 @@
 					<div class="side__block">
 						<h3 class="u-label u-dim">{UI.archive.demo}</h3>
 						<!-- leaves the terminal, so it leaves in its own tab -->
-						<a class="side__link u-hot" href={entry.href} target="_blank" rel="noopener noreferrer">
+						<a
+							class="side__link u-hot u-beacon"
+							style:--beacon-delay="900ms"
+							href={entry.href}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							{entry.href.replace(/^https?:\/\//, '')} ›
 						</a>
 					</div>
