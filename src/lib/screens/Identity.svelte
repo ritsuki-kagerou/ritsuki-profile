@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { IDENTITY } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 </script>
 
 <div class="id">
@@ -10,7 +11,7 @@
 				<span class="rec__key u-dim">{rec.key}</span>
 				<span class="rec__dots"></span>
 				<span class="rec__val" class:rec__val--ok={rec.tone === 'ok'}>
-					<Typed text={rec.value} speed={16} delay={120 + i * 90} />
+					<Typed text={rec.value} speed={16} delay={120 + i * 90} ontick={audio.type} />
 				</span>
 			</div>
 		{/each}
@@ -19,7 +20,7 @@
 	<div class="id__body">
 		{#each IDENTITY.body as para, i (i)}
 			<p>
-				<Typed text={para} speed={3} delay={500 + i * 420} />
+				<Typed text={para} speed={3} delay={500 + i * 420} ontick={audio.type} />
 			</p>
 		{/each}
 

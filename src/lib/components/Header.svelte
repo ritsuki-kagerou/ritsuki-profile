@@ -1,19 +1,28 @@
 <script lang="ts">
-	import { SYSTEM } from '$lib/data/content';
+	import { SYSTEM, UI } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 	import Wordmark from './Wordmark.svelte';
 </script>
 
 <header class="head">
 	<div class="head__row">
 		<p class="head__sys">
-			<Typed text={`${SYSTEM.unit} // ${SYSTEM.line}`} speed={16} />
+			<Typed text={`${SYSTEM.unit} // ${SYSTEM.line}`} speed={16} ontick={audio.type} />
 		</p>
 		<div class="head__mark"><Wordmark /></div>
 	</div>
 	<div class="head__meta">
 		<p class="head__manifest u-dim">{SYSTEM.manifest}</p>
-		<!-- TODO bab 13: tombol speaker [S] -->
+		<button
+			class="head__audio"
+			class:head__audio--on={audio.enabled}
+			aria-pressed={audio.enabled}
+			onclick={() => audio.toggle()}
+		>
+			<span class="u-dim">[S]</span>
+			{UI.speaker.label}: {audio.enabled ? UI.speaker.on : UI.speaker.off}
+		</button>
 	</div>
 	<hr class="u-rule" />
 </header>
@@ -55,6 +64,22 @@
 	.head__manifest {
 		font-size: 0.95em;
 		letter-spacing: 0.12em;
+	}
+
+	.head__audio {
+		font-size: 0.88em;
+		letter-spacing: 0.16em;
+		color: var(--phos-mid);
+		transition: color 120ms linear;
+	}
+
+	.head__audio:hover {
+		color: var(--phos-hot);
+	}
+
+	.head__audio--on {
+		color: var(--bar);
+		text-shadow: 0 0 6px rgba(30, 224, 124, 0.55);
 	}
 
 	@media (max-width: 640px) {

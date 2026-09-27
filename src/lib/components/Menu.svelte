@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MENU, type ScreenId } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 
 	type Props = {
 		selected: number;
@@ -26,7 +27,7 @@
 					<span class="row__caret">{i === selected ? '›' : ''}</span>
 					<span class="row__num">[{i + 1}]</span>
 					<span class="row__label">
-						<Typed text={item.label} speed={22} delay={180 + i * 110} />
+						<Typed text={item.label} speed={22} delay={180 + i * 110} ontick={audio.type} />
 					</span>
 					<span class="row__leader"></span>
 					<span class="row__blurb">{item.blurb}</span>

@@ -4,6 +4,7 @@
 
 	import { BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
 	import { Boot, ScreenFrame, Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 
 	import Header from '$lib/components/Header.svelte';
 	import Menu from '$lib/components/Menu.svelte';
@@ -26,10 +27,17 @@
 
 	let cursor = $state(0);
 
+	// Runs after hydration, so SSR and the first client render agree that the
+	// speaker is off; a remembered "on" is applied a tick later.
+	$effect(() => {
+		audio.restore();
+	});
+
 	// Keyboard and mouse both move the cursor, so it lives here, not in Menu.
 	function moveCursor(next: number) {
 		if (next === cursor) return;
 		cursor = next;
+		audio.move();
 	}
 
 	let active = $derived(MENU.find((m) => m.id === current) ?? null);
@@ -43,6 +51,7 @@
 
 	function open(id: ScreenId) {
 		cursor = IDS.indexOf(id);
+		audio.select();
 		navigate(`screen=${id}`);
 	}
 
@@ -56,8 +65,10 @@
 
 	function back() {
 		if (current === 'archive' && entryParam) {
+			audio.back();
 			navigate('screen=archive');
 		} else if (current) {
+			audio.back();
 			toMenu();
 		}
 	}
@@ -68,9 +79,17 @@
 		const target = event.target as HTMLElement | null;
 		if (target?.closest('input, textarea, [contenteditable="true"]')) return;
 
-		if (showBoot) return;
-
 		const key = event.key;
+
+		// Global, even during boot, where the log advertises it. Boot still
+		// treats it as "any key", so it both enables the speaker and moves on.
+		if (key === 's' || key === 'S') {
+			event.preventDefault();
+			audio.toggle();
+			return;
+		}
+
+		if (showBoot) return;
 
 		if (current) {
 			if (key === 'Escape' || key === 'Backspace' || key === 'ArrowLeft') {
@@ -111,6 +130,7 @@
 		<Boot
 			lines={BOOT_LINES}
 			unit={SYSTEM.unit}
+			ontick={audio.type}
 			ondone={() => {
 				booted = true;
 			}}
@@ -123,6 +143,7 @@
 					code={`${UI.sector} ${String(IDS.indexOf(current) + 1).padStart(2, '0')}/${String(MENU.length).padStart(2, '0')}`}
 					hint={current === 'archive' && entryParam ? UI.backToIndex : UI.back}
 					footer={SYSTEM.footer}
+					ontick={audio.type}
 					onback={back}
 				>
 					{#if current === 'identity'}
@@ -144,7 +165,7 @@
 			<Header />
 			<Menu selected={cursor} onselect={open} onhover={moveCursor} />
 			<p class="hint u-dim">
-				<Typed text={UI.menuHint} speed={22} delay={900} hold />
+				<Typed text={UI.menuHint} speed={22} delay={900} ontick={audio.type} hold />
 			</p>
 		</div>
 	{/if}

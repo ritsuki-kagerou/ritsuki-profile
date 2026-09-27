@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { CAPABILITIES, TOOLCHAIN, UI, type Tier } from '$lib/data/content';
 	import { Meter, Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 
 	const FILL: Record<Tier, number> = {
 		PRIMARY: 1,
@@ -15,7 +16,7 @@
 			<article class="card" style:--i={i}>
 				<span class="card__code u-dim">{cap.code}</span>
 				<h2 class="card__label u-hot">
-					<Typed text={cap.label} speed={18} delay={100 + i * 120} />
+					<Typed text={cap.label} speed={18} delay={100 + i * 120} ontick={audio.type} />
 				</h2>
 				<p class="card__spec u-dim">{cap.spec}</p>
 				<Meter

@@ -2,6 +2,7 @@
 	import { TRANSMISSION, UI } from '$lib/data/content';
 	import ChannelRow from '$lib/components/ChannelRow.svelte';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 
 	let root = $state<HTMLDivElement | null>(null);
 
@@ -18,6 +19,7 @@
 				: (here + delta + links.length) % links.length;
 
 		links[next].focus();
+		audio.move();
 	}
 
 	function onkeydown(event: KeyboardEvent) {
@@ -39,7 +41,7 @@
 <div class="tx" bind:this={root}>
 	<div class="tx__intro">
 		{#each TRANSMISSION.intro as para, i (i)}
-			<p><Typed text={para} speed={4} delay={200 + i * 400} /></p>
+			<p><Typed text={para} speed={4} delay={200 + i * 400} ontick={audio.type} /></p>
 		{/each}
 	</div>
 
@@ -68,9 +70,17 @@
 				<h2 class="u-label u-dim">{card.label}</h2>
 				<span class="card__note u-dim">{card.note}</span>
 			</header>
-			<a class="card__cmd" href={card.href} target="_blank" rel="me noopener noreferrer">
+			<a
+				class="card__cmd"
+				href={card.href}
+				target="_blank"
+				rel="me noopener noreferrer"
+				onclick={audio.select}
+			>
 				<span class="card__prompt u-dim" aria-hidden="true">$</span>
-				<code class="u-hot"><Typed text={card.command} speed={40} delay={900} hold /></code>
+				<code class="u-hot"
+					><Typed text={card.command} speed={40} delay={900} hold ontick={audio.type} /></code
+				>
 			</a>
 		</section>
 	{/if}

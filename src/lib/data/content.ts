@@ -5,7 +5,7 @@ export const PROFILE = {
 	country: 'Indonesia',
 	timezone: 'UTC+07:00',
 	email: 'ritsuki.kagerou@gmail.com',
-	github: 'RitsukiKagerou',
+	github: 'ritsuki-kagerou',
 	x: 'RitsukiKagerou'
 } as const;
 

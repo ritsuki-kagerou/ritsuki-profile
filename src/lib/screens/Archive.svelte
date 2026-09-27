@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ARCHIVE, UI } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 
 	type Props = {
 		entryId: string | null;
@@ -35,14 +36,14 @@
 		<div class="detail__head">
 			<p class="u-dim">{entry.code} / {entry.year} / {entry.role}</p>
 			<h2 class="detail__title u-hot">
-				<Typed text={entry.title} speed={20} />
+				<Typed text={entry.title} speed={20} ontick={audio.type} />
 			</h2>
 		</div>
 
 		<div class="detail__grid">
 			<div class="detail__body">
 				{#each entry.body as para, i (i)}
-					<p><Typed text={para} speed={3} delay={360 + i * 400} /></p>
+					<p><Typed text={para} speed={3} delay={360 + i * 400} ontick={audio.type} /></p>
 				{/each}
 			</div>
 
@@ -98,7 +99,7 @@
 					>
 						<span class="entry__code">{item.code}</span>
 						<span class="entry__name">
-							<Typed text={item.title} speed={16} delay={120 + i * 100} />
+							<Typed text={item.title} speed={16} delay={120 + i * 100} ontick={audio.type} />
 							<em class="entry__sum">{item.summary}</em>
 						</span>
 						<span class="entry__year">{item.year}</span>

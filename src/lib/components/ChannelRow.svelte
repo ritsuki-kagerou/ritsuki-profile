@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Channel } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 
 	type Props = { channel: Channel; delay?: number; muted?: boolean };
 	let { channel, delay = 0, muted = false }: Props = $props();
@@ -14,10 +15,11 @@
 	href={channel.href}
 	target={external ? '_blank' : undefined}
 	rel={external ? 'me noopener noreferrer' : undefined}
+	onclick={audio.select}
 >
 	<span class="ch__code u-dim">{channel.code}</span>
 	<span class="ch__label">
-		<Typed text={channel.label} speed={18} {delay} />
+		<Typed text={channel.label} speed={18} {delay} ontick={audio.type} />
 	</span>
 	<span class="ch__handle">{channel.handle}</span>
 	<span class="ch__note u-dim">{channel.note}</span>

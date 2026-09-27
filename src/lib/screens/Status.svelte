@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { STATUS, UI } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
+	import { audio } from '$lib/audio.svelte';
 </script>
 
 <div class="st">
@@ -12,7 +13,7 @@
 					<span class="stage__n u-dim">{String(i + 1).padStart(2, '0')}</span>
 					<span class="stage__rail" aria-hidden="true"><span class="stage__node"></span></span>
 					<span class="stage__label u-hot">
-						<Typed text={stage.label} speed={16} delay={140 + i * 90} />
+						<Typed text={stage.label} speed={16} delay={140 + i * 90} ontick={audio.type} />
 					</span>
 					<span class="stage__note u-dim">{stage.note}</span>
 				</li>
@@ -33,7 +34,12 @@
 				{#each STATUS.readouts as r (r.key)}
 					<li><span class="u-dim">{r.key}</span><span class="u-hot">{r.value}</span></li>
 				{/each}
-				<!-- TODO bab 13: baris SPEAKER (ENABLED / MUTED) -->
+				<li>
+					<span class="u-dim">{UI.speaker.label}</span>
+					<span class:u-hot={!audio.enabled} class:st__on={audio.enabled}>
+						{audio.enabled ? UI.speaker.enabled : UI.speaker.muted}
+					</span>
+				</li>
 			</ul>
 		</section>
 
@@ -257,5 +263,10 @@
 		.st__arrow {
 			animation: none;
 		}
+	}
+
+	.st__on {
+		color: var(--bar);
+		text-shadow: 0 0 6px rgba(30, 224, 124, 0.55);
 	}
 </style>
