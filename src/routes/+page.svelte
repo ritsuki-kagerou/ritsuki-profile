@@ -2,11 +2,17 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 
-	import { ARCHIVE, BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
+	import { BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
 	import { Boot, ScreenFrame, Typed } from '@ritsuki.kagerou/crt-ui';
 
 	import Header from '$lib/components/Header.svelte';
 	import Menu from '$lib/components/Menu.svelte';
+
+	import Identity from '$lib/screens/Identity.svelte';
+	import Capabilities from '$lib/screens/Capabilities.svelte';
+	import Archive from '$lib/screens/Archive.svelte';
+	import Transmission from '$lib/screens/Transmission.svelte';
+	import Status from '$lib/screens/Status.svelte';
 
 	const IDS = MENU.map((m) => m.id);
 
@@ -27,7 +33,6 @@
 	}
 
 	let active = $derived(MENU.find((m) => m.id === current) ?? null);
-	let entry = $derived(ARCHIVE.find((e) => e.id === entryParam) ?? null);
 	let title = $derived(
 		active ? `${active.label} — ${SYSTEM.unit}` : `${SYSTEM.unit} — ${SYSTEM.wordmark}`
 	);
@@ -120,32 +125,16 @@
 					footer={SYSTEM.footer}
 					onback={back}
 				>
-					{#if current === 'archive'}
-						{#if entry}
-							<p>{entry.code} / {entry.year} / {entry.role}</p>
-							<p class="u-hot">{entry.title}</p>
-							<p class="u-dim">{entry.summary}</p>
-							{#if entry.href}
-								<!-- leaves the terminal, so it leaves in its own tab -->
-								<p>
-									<a href={entry.href} target="_blank" rel="noopener noreferrer">
-										{UI.archive.demo} › {entry.href.replace(/^https?:\/\//, '')}
-									</a>
-								</p>
-							{/if}
-						{:else}
-							<ul>
-								{#each ARCHIVE as item (item.id)}
-									<li>
-										<button onclick={() => openEntry(item.id)}>
-											{item.code} — {item.title}
-										</button>
-									</li>
-								{/each}
-							</ul>
-						{/if}
-					{:else}
-						<p class="u-dim">TODO {current}</p>
+					{#if current === 'identity'}
+						<Identity />
+					{:else if current === 'capabilities'}
+						<Capabilities />
+					{:else if current === 'archive'}
+						<Archive entryId={entryParam} onopen={openEntry} />
+					{:else if current === 'transmission'}
+						<Transmission />
+					{:else if current === 'status'}
+						<Status />
 					{/if}
 				</ScreenFrame>
 			</div>
