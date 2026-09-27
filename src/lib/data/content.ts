@@ -156,6 +156,8 @@ export type ArchiveEntry = {
 	body: string[];
 	stack: string[];
 	metrics: { key: string; value: string }[];
+	/** A live demo or docs site. Omit when there is nothing public to open. */
+	href?: string;
 };
 
 export const ARCHIVE: ArchiveEntry[] = [
@@ -234,6 +236,26 @@ export const ARCHIVE: ArchiveEntry[] = [
 			{ key: 'RANKING', value: 'FTS + VECTOR' },
 			{ key: 'EXPOSED', value: '4 MCP TOOLS' }
 		]
+	},
+	{
+		id: 'crt-ui',
+		code: 'AR-05',
+		title: 'CRT-UI — SVELTE 5 COMPONENTS',
+		year: 'SEP 2026',
+		role: 'LIBRARY, SOLO',
+		status: 'SHIPPED',
+		summary: 'The five pieces every retro-terminal UI rewrites, extracted and published to npm.',
+		body: [
+			'A typewriter line, a CRT overlay, a segmented meter, a boot log and the frame around a screen — pulled out of this site once they stopped knowing anything about it, given an API, and published as @ritsuki.kagerou/crt-ui. This site is its first consumer.',
+			'The typewriter server-renders the finished line and only starts typing after hydration, so the server and the first client render agree by construction. That is tested rather than claimed: CI renders every component on the server, mounts its browser build and fails if the markup differs, then hydrates a real SvelteKit app in Chromium. Theming is --crt-* custom properties, and every animation respects reduced motion.'
+		],
+		stack: ['SVELTE 5', 'TYPESCRIPT', 'VITEST', 'PLAYWRIGHT'],
+		metrics: [
+			{ key: 'COMPONENTS', value: '5' },
+			{ key: 'RUNTIME DEPS', value: '0' },
+			{ key: 'HYDRATION', value: 'TESTED IN CI' }
+		],
+		href: 'https://crt-ui.ritsuki.dev'
 	}
 ];
 
@@ -353,6 +375,7 @@ export const UI = {
 		metrics: 'METRICS',
 		stack: 'STACK',
 		status: 'STATUS',
+		demo: 'LIVE DEMO',
 		columns: ['CODE', 'DESIGNATION', 'BUILT', 'STATUS']
 	},
 	status: { readout: 'READOUT', manifest: 'BUILD MANIFEST' }
