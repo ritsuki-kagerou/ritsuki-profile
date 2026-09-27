@@ -33,7 +33,7 @@
 		gap: 1rem;
 		align-items: baseline;
 		padding: 0.85rem 0.9rem;
-		border-bottom: 1px solid rgba(74, 222, 128, 0.12);
+		border-bottom: 1px solid color-mix(in srgb, var(--phos) 12%, transparent);
 		transition:
 			background 90ms linear,
 			padding-left 140ms ease,
@@ -42,7 +42,7 @@
 
 	.ch:hover,
 	.ch:focus-visible {
-		background: rgba(74, 222, 128, 0.07);
+		background: color-mix(in srgb, var(--phos) 7%, transparent);
 		padding-left: 1.5rem;
 	}
 

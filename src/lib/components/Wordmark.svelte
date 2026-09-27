@@ -35,18 +35,18 @@
 		font-size: clamp(1.7rem, 3.4vw, 2.6rem);
 		line-height: 0.9;
 		letter-spacing: -0.02em;
-		color: var(--alert);
+		color: var(--mark);
 		text-shadow:
-			0 0 12px rgba(255, 95, 69, 0.45),
-			2px 0 0 rgba(255, 95, 69, 0.35);
+			0 0 12px color-mix(in srgb, var(--mark) 45%, transparent),
+			2px 0 0 color-mix(in srgb, var(--mark) 35%, transparent);
 	}
 
-	/* chromatic fringe, the way a shadow mask smears a red channel */
+	/* chromatic fringe, the way a shadow mask smears a misconverged channel */
 	.mark__name::before {
 		content: attr(data-text);
 		position: absolute;
 		inset: 0;
-		color: rgba(120, 220, 255, 0.28);
+		color: rgba(255, 140, 110, 0.26);
 		translate: -2px 0;
 		mix-blend-mode: screen;
 		pointer-events: none;

@@ -63,9 +63,9 @@
 
 	.row--on {
 		background: var(--bar);
-		color: #04170c;
+		color: var(--on-bar);
 		text-shadow: none;
-		box-shadow: 0 0 22px rgba(30, 224, 124, 0.35);
+		box-shadow: 0 0 22px color-mix(in srgb, var(--bar) 35%, transparent);
 	}
 
 	.row__caret {
@@ -77,7 +77,7 @@
 	}
 
 	.row--on .row__num {
-		color: rgba(4, 23, 12, 0.7);
+		color: color-mix(in srgb, var(--on-bar) 70%, transparent);
 	}
 
 	.row__leader {
@@ -96,7 +96,7 @@
 	}
 
 	.row--on .row__blurb {
-		color: rgba(4, 23, 12, 0.72);
+		color: color-mix(in srgb, var(--on-bar) 72%, transparent);
 	}
 
 	@media (max-width: 720px) {

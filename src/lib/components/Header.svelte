@@ -93,7 +93,7 @@
 
 	.head__audio--on {
 		color: var(--bar);
-		text-shadow: 0 0 6px rgba(30, 224, 124, 0.55);
+		text-shadow: 0 0 6px color-mix(in srgb, var(--bar) 55%, transparent);
 	}
 
 	@media (max-width: 640px) {

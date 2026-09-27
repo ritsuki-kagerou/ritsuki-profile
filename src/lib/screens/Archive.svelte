@@ -144,13 +144,13 @@
 	.entry {
 		width: 100%;
 		padding: 0.7rem 0.9rem;
-		border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+		border-bottom: 1px solid color-mix(in srgb, var(--phos) 10%, transparent);
 		transition: background 90ms linear;
 	}
 
 	.entry--on {
 		background: var(--bar);
-		color: #04170c;
+		color: var(--on-bar);
 		text-shadow: none;
 	}
 
@@ -165,7 +165,7 @@
 	.entry--on .entry__code,
 	.entry--on .entry__year,
 	.entry--on .entry__status {
-		color: rgba(4, 23, 12, 0.72);
+		color: color-mix(in srgb, var(--on-bar) 72%, transparent);
 	}
 
 	.entry__name {
@@ -179,7 +179,7 @@
 	}
 
 	.entry--on .entry__name {
-		color: #04170c;
+		color: var(--on-bar);
 	}
 
 	.entry__sum {
@@ -192,7 +192,7 @@
 	}
 
 	.entry--on .entry__sum {
-		color: rgba(4, 23, 12, 0.66);
+		color: color-mix(in srgb, var(--on-bar) 66%, transparent);
 	}
 
 	.list__hint {
@@ -237,7 +237,7 @@
 		gap: 1.3rem;
 		padding: 1.1rem 1.2rem;
 		border: 1px solid var(--rule);
-		background: rgba(74, 222, 128, 0.025);
+		background: color-mix(in srgb, var(--phos) 2.5%, transparent);
 	}
 
 	.side__block {

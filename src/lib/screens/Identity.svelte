@@ -109,7 +109,7 @@
 		gap: 0.35rem;
 		padding: 1rem 1.1rem;
 		border: 1px solid var(--rule);
-		background: rgba(74, 222, 128, 0.025);
+		background: color-mix(in srgb, var(--phos) 2.5%, transparent);
 	}
 
 	.rec {
@@ -140,7 +140,7 @@
 
 	.rec__val--ok {
 		color: var(--amber);
-		text-shadow: 0 0 4px rgba(251, 191, 36, 0.45);
+		text-shadow: 0 0 4px color-mix(in srgb, var(--amber) 45%, transparent);
 	}
 
 	.id__body {
@@ -178,7 +178,7 @@
 		width: 0.5rem;
 		height: 0.5rem;
 		background: var(--bar);
-		box-shadow: 0 0 8px rgba(30, 224, 124, 0.6);
+		box-shadow: 0 0 8px color-mix(in srgb, var(--bar) 60%, transparent);
 		animation: mark-blink 2.6s steps(1, end) infinite;
 		animation-delay: calc(var(--i) * 320ms);
 	}

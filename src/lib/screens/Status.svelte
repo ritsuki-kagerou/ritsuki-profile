@@ -120,7 +120,7 @@
 		height: 7px;
 		border-radius: 50%;
 		background: var(--bar);
-		box-shadow: 0 0 9px rgba(30, 224, 124, 0.45);
+		box-shadow: 0 0 9px color-mix(in srgb, var(--bar) 45%, transparent);
 		animation: node-in 420ms ease-out backwards;
 		animation-delay: calc(140ms + var(--i) * 90ms);
 	}
@@ -218,7 +218,7 @@
 		display: grid;
 		gap: 0.7rem;
 		padding: 1.1rem 1.2rem 1.3rem;
-		background: #000;
+		background: var(--bg);
 	}
 
 	.pane ul {
@@ -267,6 +267,6 @@
 
 	.st__on {
 		color: var(--bar);
-		text-shadow: 0 0 6px rgba(30, 224, 124, 0.55);
+		text-shadow: 0 0 6px color-mix(in srgb, var(--bar) 55%, transparent);
 	}
 </style>

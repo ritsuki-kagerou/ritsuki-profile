@@ -1,21 +1,28 @@
 /* ------------------------------------------------------------------
    CRT terminal — global shell
-   Single-look, dark-only by design. Phosphor green on black.
+   Single-look, dark-only by design. Phosphor on black: every colour in the
+   app derives from the tokens in :root, so a theme is a change to :root alone.
    ------------------------------------------------------------------ */
 
 :root {
 	--bg: #000000;
 	--phos: #4ade80;
 	--phos-hot: #d5ffe6;
-	--phos-mid: rgba(74, 222, 128, 0.62);
-	--phos-dim: rgba(74, 222, 128, 0.4);
-	--phos-faint: rgba(74, 222, 128, 0.16);
+	--phos-mid: color-mix(in srgb, var(--phos) 62%, transparent);
+	--phos-dim: color-mix(in srgb, var(--phos) 40%, transparent);
+	--phos-faint: color-mix(in srgb, var(--phos) 16%, transparent);
 	--bar: #1ee07c;
+	/* dark ink for text sitting on the bright --bar */
+	--on-bar: #04170c;
 	--amber: #fbbf24;
 	--alert: #ff5f45;
-	--rule: rgba(74, 222, 128, 0.26);
-	--glow-s: 0 0 3px rgba(74, 222, 128, 0.5);
-	--glow-m: 0 0 4px rgba(74, 222, 128, 0.55), 0 0 16px rgba(74, 222, 128, 0.18);
+	/* the wordmark and favicon — a lit version of the avatar's #165ba8 */
+	--mark: #4a9df5;
+	--rule: color-mix(in srgb, var(--phos) 26%, transparent);
+	--glow-s: 0 0 3px color-mix(in srgb, var(--phos) 50%, transparent);
+	--glow-m:
+		0 0 4px color-mix(in srgb, var(--phos) 55%, transparent),
+		0 0 16px color-mix(in srgb, var(--phos) 18%, transparent);
 
 	--mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 	--display: 'Martian Mono', var(--mono);
@@ -31,6 +38,8 @@
 	--crt-phos-faint: var(--phos-faint);
 	--crt-bar: var(--bar);
 	--crt-rule: var(--rule);
+	--crt-glow: color-mix(in srgb, var(--bar) 50%, transparent);
+	--crt-flicker-ink: color-mix(in srgb, var(--phos) 2.5%, transparent);
 	--crt-mono: var(--mono);
 	--crt-display: var(--display);
 
@@ -66,7 +75,7 @@ body {
 
 ::selection {
 	background: var(--bar);
-	color: #041b0d;
+	color: var(--on-bar);
 	text-shadow: none;
 }
 
@@ -119,15 +128,15 @@ ol {
 }
 .u-hot {
 	color: var(--phos-hot);
-	text-shadow: 0 0 6px rgba(213, 255, 230, 0.6);
+	text-shadow: 0 0 6px color-mix(in srgb, var(--phos-hot) 60%, transparent);
 }
 .u-amber {
 	color: var(--amber);
-	text-shadow: 0 0 4px rgba(251, 191, 36, 0.45);
+	text-shadow: 0 0 4px color-mix(in srgb, var(--amber) 45%, transparent);
 }
 .u-alert {
 	color: var(--alert);
-	text-shadow: 0 0 4px rgba(255, 95, 69, 0.5);
+	text-shadow: 0 0 4px color-mix(in srgb, var(--alert) 50%, transparent);
 }
 
 .u-label {
@@ -142,7 +151,7 @@ ol {
 	height: 1px;
 	border: 0;
 	margin: 0;
-	background: linear-gradient(90deg, var(--rule), rgba(74, 222, 128, 0.06));
+	background: linear-gradient(90deg, var(--rule), color-mix(in srgb, var(--phos) 6%, transparent));
 }
 
 .u-shell {

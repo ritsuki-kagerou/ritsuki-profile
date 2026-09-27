@@ -57,12 +57,12 @@
 		display: grid;
 		gap: 0.6rem;
 		padding: 1.1rem 1.2rem 1.3rem;
-		background: #000;
+		background: var(--bg);
 		transition: background 140ms linear;
 	}
 
 	.card:hover {
-		background: rgba(74, 222, 128, 0.05);
+		background: color-mix(in srgb, var(--phos) 5%, transparent);
 	}
 
 	.card__code {
