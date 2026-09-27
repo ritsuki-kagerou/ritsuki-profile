@@ -130,6 +130,18 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={SYSTEM.description} />
+
+	<!-- link previews (Discord, Slack, X…) -->
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content={SYSTEM.site} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={SYSTEM.description} />
+	<meta property="og:url" content={page.url.href} />
+	<meta property="og:image" content={`${page.url.origin}/og.png`} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content={SYSTEM.ogImageAlt} />
+	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
 <svelte:window {onkeydown} />

@@ -13,6 +13,7 @@ pnpm check    # svelte-check
 pnpm lint     # Prettier, check only
 pnpm test     # build, preview, then the Playwright e2e suite
 pnpm build    # production build
+pnpm og       # re-render static/og.png (link preview) from scripts/og.html
 ```
 
 ## Navigation

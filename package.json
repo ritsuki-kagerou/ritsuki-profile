@@ -15,7 +15,8 @@
 		"lint": "prettier --check .",
 		"format": "prettier --write .",
 		"test:e2e": "playwright install && playwright test",
-		"test": "pnpm test:e2e"
+		"test": "pnpm test:e2e",
+		"og": "node scripts/og.js"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.60.0",

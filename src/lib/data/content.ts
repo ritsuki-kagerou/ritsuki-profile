@@ -32,8 +32,9 @@ export const SYSTEM = {
 	wordmark: NAME,
 	manifest: `CARRIER ${NAME} // MANIFEST 001`,
 	footer: `${SYSTEM_UNIT} SERIES / PERSONAL BROADCAST UNIT`,
-	/** `<meta name="description">` — what search results and link previews show. */
-	description: `${PROFILE.name} — ${PROFILE.role.toLowerCase()} in ${PROFILE.city}, ${PROFILE.country}. Backend, infrastructure and self-hosted systems. Open for freelance work.`
+	description: `${PROFILE.name} — ${PROFILE.role.toLowerCase()} in ${PROFILE.city}, ${PROFILE.country}. Backend, infrastructure and self-hosted systems. Open for freelance work.`,
+	site: 'ritsuki.dev',
+	ogImageAlt: `${PROFILE.name}, ${PROFILE.role.toLowerCase()}: the ${SYSTEM_UNIT} terminal showing the wordmark, role and avatar in green phosphor.`
 } as const;
 
 export const MENU: MenuEntry[] = [
