@@ -34,6 +34,10 @@ export const SYSTEM = {
 	footer: `${SYSTEM_UNIT} SERIES / PERSONAL BROADCAST UNIT`,
 	description: `${PROFILE.name} — ${PROFILE.role.toLowerCase()} in ${PROFILE.city}, ${PROFILE.country}. Backend, infrastructure and self-hosted systems. Open for freelance work.`,
 	site: 'ritsuki.dev',
+	// search results show the title first: lead with who, then the terminal
+	heading: `${PROFILE.name} — ${PROFILE.role}`,
+	title: `${PROFILE.name} — ${PROFILE.role} · ${SYSTEM_UNIT}`,
+	screenTitle: (label: string) => `${label} — ${PROFILE.name} · ${SYSTEM_UNIT}`,
 	ogImageAlt: `${PROFILE.name}, ${PROFILE.role.toLowerCase()}: the ${SYSTEM_UNIT} terminal showing the wordmark, role and avatar in green phosphor.`
 } as const;
 
@@ -371,6 +375,7 @@ export const UI = {
 	back: '[ESC] BACK',
 	backToIndex: '[ESC] INDEX',
 	sector: 'SECTOR',
+	siteIndex: 'Site index',
 	speaker: {
 		label: 'SPEAKER',
 		on: 'ON',

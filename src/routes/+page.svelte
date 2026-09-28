@@ -2,10 +2,11 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 
-	import { BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
+	import { ARCHIVE, BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
 	import { Boot, ScreenFrame, Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
 	import { theme } from '$lib/theme.svelte';
+	import { ORIGIN, canonicalPath, personJsonLd } from '$lib/seo';
 
 	import Header from '$lib/components/Header.svelte';
 	import Menu from '$lib/components/Menu.svelte';
@@ -43,9 +44,18 @@
 	}
 
 	let active = $derived(MENU.find((m) => m.id === current) ?? null);
-	let title = $derived(
-		active ? `${active.label} — ${SYSTEM.unit}` : `${SYSTEM.unit} — ${SYSTEM.wordmark}`
+	let entry = $derived(
+		current === 'archive' ? (ARCHIVE.find((a) => a.id === entryParam) ?? null) : null
 	);
+	let title = $derived(
+		entry
+			? SYSTEM.screenTitle(entry.title)
+			: active
+				? SYSTEM.screenTitle(active.label)
+				: SYSTEM.title
+	);
+	let description = $derived(entry?.summary ?? SYSTEM.description);
+	let canonical = $derived(ORIGIN + canonicalPath(screenParam, entryParam));
 
 	function navigate(query: string) {
 		goto(`?${query}`, { noScroll: true, keepFocus: true });
@@ -129,24 +139,47 @@
 
 <svelte:head>
 	<title>{title}</title>
-	<meta name="description" content={SYSTEM.description} />
+	<meta name="description" content={description} />
+	<link rel="canonical" href={canonical} />
 
 	<!-- link previews (Discord, Slack, X…) -->
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content={SYSTEM.site} />
 	<meta property="og:title" content={title} />
-	<meta property="og:description" content={SYSTEM.description} />
-	<meta property="og:url" content={page.url.href} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content={canonical} />
 	<meta property="og:image" content={`${page.url.origin}/og.png`} />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta property="og:image:alt" content={SYSTEM.ogImageAlt} />
 	<meta name="twitter:card" content="summary_large_image" />
+
+	{#if !current}
+		<!-- static JSON from our own content, `<` escaped in personJsonLd -->
+		{@html `<script type="application/ld+json">${personJsonLd()}</script>`}
+	{/if}
 </svelte:head>
 
 <svelte:window {onkeydown} />
 
 <main class="u-shell">
+	<!-- The home page opens on the boot log, so this is what crawlers and
+	     screen readers get as its content and its way into every screen. -->
+	{#if !current}
+		<div class="u-sr-only">
+			<h1>{SYSTEM.heading}</h1>
+			<p>{SYSTEM.description}</p>
+			{#if showBoot}
+				<nav aria-label={UI.siteIndex}>
+					<ul>
+						{#each MENU as item (item.id)}
+							<li><a href="?screen={item.id}">{item.label}</a> — {item.blurb}</li>
+						{/each}
+					</ul>
+				</nav>
+			{/if}
+		</div>
+	{/if}
 	{#if showBoot}
 		<Boot
 			lines={BOOT_LINES}

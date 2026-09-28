@@ -2,6 +2,7 @@
 	import { MENU, type ScreenId } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
+	import { isPlainClick } from '$lib/links';
 
 	type Props = {
 		selected: number;
@@ -16,13 +17,18 @@
 	<ul>
 		{#each MENU as item, i (item.id)}
 			<li>
-				<button
+				<a
 					class="row"
 					class:row--on={i === selected}
+					href="?screen={item.id}"
 					aria-current={i === selected ? 'true' : undefined}
 					onmouseenter={() => onhover(i)}
 					onfocus={() => onhover(i)}
-					onclick={() => onselect(item.id)}
+					onclick={(e) => {
+						if (!isPlainClick(e)) return;
+						e.preventDefault();
+						onselect(item.id);
+					}}
 				>
 					<span class="row__caret">{i === selected ? '›' : ''}</span>
 					<span class="row__num">[{i + 1}]</span>
@@ -31,7 +37,7 @@
 					</span>
 					<span class="row__leader"></span>
 					<span class="row__blurb">{item.blurb}</span>
-				</button>
+				</a>
 			</li>
 		{/each}
 	</ul>

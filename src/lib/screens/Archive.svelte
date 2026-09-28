@@ -2,6 +2,7 @@
 	import { ARCHIVE, UI } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
+	import { isPlainClick } from '$lib/links';
 
 	type Props = {
 		entryId: string | null;
@@ -96,12 +97,17 @@
 		<ul>
 			{#each ARCHIVE as item, i (item.id)}
 				<li>
-					<button
+					<a
 						class="entry"
 						class:entry--on={i === cursor}
+						href="?screen=archive&entry={item.id}"
 						onmouseenter={() => (cursor = i)}
 						onfocus={() => (cursor = i)}
-						onclick={() => onopen(item.id)}
+						onclick={(e) => {
+							if (!isPlainClick(e)) return;
+							e.preventDefault();
+							onopen(item.id);
+						}}
 					>
 						<span class="entry__code">{item.code}</span>
 						<span class="entry__name">
@@ -110,7 +116,7 @@
 						</span>
 						<span class="entry__year">{item.year}</span>
 						<span class="entry__status">[{item.status}]</span>
-					</button>
+					</a>
 				</li>
 			{/each}
 		</ul>

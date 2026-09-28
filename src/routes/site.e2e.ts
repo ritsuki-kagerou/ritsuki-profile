@@ -26,6 +26,49 @@ test.describe('without JavaScript', () => {
 	}
 });
 
+test.describe('for crawlers', () => {
+	test.use({ javaScriptEnabled: false });
+
+	test('the boot page links to every screen', async ({ page }) => {
+		await page.goto('/');
+		await expect(page.locator('h1')).toHaveText(/full stack developer/i);
+		const index = page.getByRole('navigation', { name: 'Site index' });
+		await expect(index.locator('a[href="?screen=archive"]')).toHaveCount(1);
+		await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
+	});
+
+	test('the menu and archive rows are real links', async ({ page }) => {
+		await page.goto('/?screen=archive');
+		await expect(page.locator('a[href="?screen=archive&entry=keuangan"]')).toHaveCount(1);
+		await page.goto('/?screen=menu');
+		await expect(page.locator('a[href="?screen=identity"]')).toHaveCount(1);
+	});
+
+	for (const [url, canonical] of [
+		['/', 'https://ritsuki.dev/'],
+		['/?screen=menu', 'https://ritsuki.dev/'],
+		['/?screen=nope', 'https://ritsuki.dev/'],
+		['/?screen=identity&x=1', 'https://ritsuki.dev/?screen=identity'],
+		['/?screen=archive&entry=crt-ui', 'https://ritsuki.dev/?screen=archive&entry=crt-ui'],
+		['/?screen=archive&entry=nope', 'https://ritsuki.dev/?screen=archive']
+	]) {
+		test(`${url} is canonical at ${canonical}`, async ({ page }) => {
+			await page.goto(url);
+			await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+		});
+	}
+
+	test('sitemap.xml lists every screen and entry', async ({ request }) => {
+		const res = await request.get('/sitemap.xml');
+		expect(res.ok()).toBe(true);
+		expect(res.headers()['content-type']).toContain('xml');
+		const xml = await res.text();
+		expect(xml).toContain('<loc>https://ritsuki.dev/</loc>');
+		expect(xml).toContain('<loc>https://ritsuki.dev/?screen=status</loc>');
+		expect(xml).toContain('<loc>https://ritsuki.dev/?screen=archive&amp;entry=pilih-in</loc>');
+	});
+});
+
 test('a deep link skips boot', async ({ page }) => {
 	const messages = watchConsole(page);
 	await page.goto('/?screen=capabilities');
