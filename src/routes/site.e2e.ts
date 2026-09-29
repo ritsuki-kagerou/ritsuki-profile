@@ -44,6 +44,22 @@ test.describe('for crawlers', () => {
 		await expect(page.locator('a[href="?screen=identity"]')).toHaveCount(1);
 	});
 
+	for (const [url, back] of [
+		['/?screen=identity', '?screen=menu'],
+		['/?screen=status', '?screen=menu'],
+		['/?screen=archive&entry=crt-ui', '?screen=archive']
+	]) {
+		test(`${url} links back to ${back}`, async ({ page }) => {
+			await page.goto(url);
+			await expect(page.locator(`a.screen__back[href="${back}"]`)).toHaveCount(1);
+		});
+	}
+
+	test('typed text is in the HTML once', async ({ page }) => {
+		await page.goto('/?screen=identity');
+		await expect(page.locator('h1')).toHaveText('IDENTITY');
+	});
+
 	for (const [url, canonical] of [
 		['/', 'https://ritsuki.dev/'],
 		['/?screen=menu', 'https://ritsuki.dev/'],
@@ -102,6 +118,12 @@ test('keyboard drives the whole site', async ({ page }) => {
 	await expect(page).toHaveURL(/entry=keuangan/);
 
 	await page.keyboard.press('Escape');
+	await expect(page).toHaveURL(/screen=archive$/);
+
+	await page.locator('.screen__back').click();
+	await expect(page).toHaveURL(/screen=menu/);
+	await expect(page.locator('.boot')).toHaveCount(0);
+	await page.goBack();
 	await expect(page).toHaveURL(/screen=archive$/);
 
 	await page.goBack();

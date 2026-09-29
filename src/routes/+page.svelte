@@ -198,6 +198,7 @@
 					hint={current === 'archive' && entryParam ? UI.backToIndex : UI.back}
 					footer={SYSTEM.footer}
 					ontick={audio.type}
+					backHref={current === 'archive' && entryParam ? '?screen=archive' : '?screen=menu'}
 					onback={back}
 				>
 					{#if current === 'identity'}

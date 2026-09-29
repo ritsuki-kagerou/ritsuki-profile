@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ritsuki.kagerou/crt-ui':
-        specifier: ^1.0.1
-        version: 1.0.1(svelte@5.57.1)
+        specifier: ^1.1.0
+        version: 1.1.0(svelte@5.57.1)
     devDependencies:
       '@playwright/test':
         specifier: ^1.60.0
@@ -79,8 +79,8 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
-  '@ritsuki.kagerou/crt-ui@1.0.1':
-    resolution: {integrity: sha512-Wr2FCnacnLwh315JR9PC8Im3CLyzTVi6zKAl8zc9rUQMLaFINTyaQ3FUSZdN126P6cPzUD9Ut/UsdVW0GRc+UQ==}
+  '@ritsuki.kagerou/crt-ui@1.1.0':
+    resolution: {integrity: sha512-BvFI0tM7edYffJPxc4JDQ+iGk7fWhvc2udxr8nCjFAcApjttDXxZUKnkITQR70vqmS20TR2cPso5Db3B3ctzwA==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -795,7 +795,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@ritsuki.kagerou/crt-ui@1.0.1(svelte@5.57.1)':
+  '@ritsuki.kagerou/crt-ui@1.1.0(svelte@5.57.1)':
     dependencies:
       svelte: 5.57.1
 
