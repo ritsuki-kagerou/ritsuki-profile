@@ -187,8 +187,11 @@ test('beacons blink a few times, then stop', async ({ page }) => {
 
 test('the speaker beacon stops once the speaker is on', async ({ page }) => {
 	await page.goto('/?screen=menu');
+	const toggle = page.locator('.head__audio');
+	await expect(toggle).toHaveClass(/u-beacon/);
 	await page.keyboard.press('s');
-	await expect(page.locator('.head__audio')).not.toHaveClass(/u-beacon/);
+	await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+	await expect(toggle).not.toHaveClass(/u-beacon/);
 });
 
 test('theme: green by default, T cycles, remembered before first paint', async ({ page }) => {
