@@ -50,8 +50,12 @@
 	--crt-rule: var(--rule);
 	--crt-glow: color-mix(in srgb, var(--bar) 50%, transparent);
 	--crt-flicker-ink: color-mix(in srgb, var(--phos) 2.5%, transparent);
+	--crt-alert: var(--alert);
 	--crt-mono: var(--mono);
 	--crt-display: var(--display);
+	/* grain is texture, not weather: under the library's 0.07 it stops
+	   competing with the small dim text */
+	--crt-noise-opacity: 0.045;
 
 	--shell: min(1160px, 92vw);
 	--gut: clamp(1rem, 4vw, 2rem);
@@ -230,4 +234,10 @@ ol {
 	.u-beacon > * {
 		animation: none;
 	}
+}
+
+/* [M] MOTION: OFF — crt-ui reads the same attribute */
+[data-crt-motion='off'] .u-beacon,
+[data-crt-motion='off'] .u-beacon > * {
+	animation: none;
 }

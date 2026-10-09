@@ -256,14 +256,15 @@ export const ARCHIVE: ArchiveEntry[] = [
 		year: 'SEP 2026',
 		role: 'LIBRARY, SOLO',
 		status: 'SHIPPED',
-		summary: 'The five pieces every retro-terminal UI rewrites, extracted and published to npm.',
+		summary:
+			'The five pieces every retro-terminal UI rewrites, plus the controls around them, published to npm.',
 		body: [
-			'A typewriter line, a CRT overlay, a segmented meter, a boot log and the frame around a screen — pulled out of this site once they stopped knowing anything about it, given an API, and published as @ritsuki.kagerou/crt-ui. This site is its first consumer.',
-			'The typewriter server-renders the finished line and only starts typing after hydration, so the server and the first client render agree by construction. That is tested rather than claimed: CI renders every component on the server, mounts its browser build and fails if the markup differs, then hydrates a real SvelteKit app in Chromium. Theming is --crt-* custom properties, and every animation respects reduced motion.'
+			'A typewriter line, a CRT overlay, a segmented meter, a boot log and the frame around a screen — pulled out of this site once they stopped knowing anything about it, given an API, and published as @ritsuki.kagerou/crt-ui. This site is its first consumer. Since then it has grown the controls a terminal UI needs around them — button, input, select, table, dialog, tabs, dropdown and toasts — built on native elements and the WAI-ARIA patterns.',
+			'The typewriter server-renders the finished line and only starts typing after hydration, so the server and the first client render agree by construction. That is tested rather than claimed: CI renders every component on the server, mounts its browser build and fails if the markup differs, then hydrates a real SvelteKit app in Chromium. Theming is --crt-* custom properties, and every animation respects reduced motion — or one data-crt-motion attribute, which is what [M] on this site flips.'
 		],
 		stack: ['SVELTE 5', 'TYPESCRIPT', 'VITEST', 'PLAYWRIGHT'],
 		metrics: [
-			{ key: 'COMPONENTS', value: '5' },
+			{ key: 'COMPONENTS', value: '13' },
 			{ key: 'RUNTIME DEPS', value: '0' },
 			{ key: 'HYDRATION', value: 'TESTED IN CI' }
 		],
@@ -386,6 +387,11 @@ export const UI = {
 	theme: {
 		label: 'THEME',
 		names: { amber: 'AMBER', green: 'GREEN', white: 'WHITE' }
+	},
+	motion: {
+		label: 'MOTION',
+		on: 'ON',
+		off: 'OFF'
 	},
 	capabilities: { toolchain: 'SUBSYSTEMS' },
 	archive: {

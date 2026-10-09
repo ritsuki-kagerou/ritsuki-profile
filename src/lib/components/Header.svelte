@@ -6,6 +6,7 @@
 	import { SYSTEM, UI } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
+	import { motion } from '$lib/motion.svelte';
 	import { theme } from '$lib/theme.svelte';
 	import Wordmark from './Wordmark.svelte';
 
@@ -37,6 +38,17 @@
 			>
 				<span class="u-dim">[T]</span>
 				{UI.theme.label}: {UI.theme.names[theme.current]}
+			</button>
+			<button
+				class="head__ctl head__motion"
+				aria-pressed={motion.enabled}
+				onclick={() => {
+					motion.toggle();
+					audio.select();
+				}}
+			>
+				<span class="u-dim">[M]</span>
+				{UI.motion.label}: {motion.enabled ? UI.motion.on : UI.motion.off}
 			</button>
 			<button
 				class="head__ctl head__audio"

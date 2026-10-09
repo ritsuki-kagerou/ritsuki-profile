@@ -17,6 +17,8 @@
 			try {
 				var t = localStorage.getItem('rkos.theme');
 				if (t === 'amber' || t === 'white') document.documentElement.dataset.theme = t;
+				if (localStorage.getItem('rkos.motion') === 'off')
+					document.documentElement.dataset.crtMotion = 'off';
 			} catch (e) {}
 		</script>
 		%sveltekit.head%

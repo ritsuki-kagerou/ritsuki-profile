@@ -214,4 +214,13 @@
 			transition: none;
 		}
 	}
+
+	:global([data-crt-motion='off']) .id__marker {
+		animation: none;
+	}
+
+	:global([data-crt-motion='off']) .portrait__tube img,
+	:global([data-crt-motion='off']) .portrait__tube::after {
+		transition: none;
+	}
 </style>

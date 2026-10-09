@@ -265,6 +265,13 @@
 		}
 	}
 
+	:global([data-crt-motion='off']) .stage__rail::before,
+	:global([data-crt-motion='off']) .stage__node,
+	:global([data-crt-motion='off']) .st__elbow::before,
+	:global([data-crt-motion='off']) .st__arrow {
+		animation: none;
+	}
+
 	.st__on {
 		color: var(--bar);
 		text-shadow: 0 0 6px color-mix(in srgb, var(--bar) 55%, transparent);

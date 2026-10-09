@@ -116,4 +116,8 @@
 			animation: none;
 		}
 	}
+
+	:global([data-crt-motion='off']) .chain li {
+		animation: none;
+	}
 </style>

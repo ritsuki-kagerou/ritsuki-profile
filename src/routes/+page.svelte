@@ -5,6 +5,7 @@
 	import { ARCHIVE, BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
 	import { Boot, ScreenFrame, Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
+	import { motion } from '$lib/motion.svelte';
 	import { theme } from '$lib/theme.svelte';
 	import { ORIGIN, canonicalPath, personJsonLd } from '$lib/seo';
 
@@ -34,6 +35,7 @@
 	$effect(() => {
 		audio.restore();
 		theme.restore();
+		motion.restore();
 	});
 
 	// Keyboard and mouse both move the cursor, so it lives here, not in Menu.
@@ -104,6 +106,13 @@
 		if (key === 't' || key === 'T') {
 			event.preventDefault();
 			theme.cycle();
+			audio.select();
+			return;
+		}
+
+		if (key === 'm' || key === 'M') {
+			event.preventDefault();
+			motion.toggle();
 			audio.select();
 			return;
 		}
@@ -258,5 +267,9 @@
 		.flick {
 			animation: none;
 		}
+	}
+
+	:global([data-crt-motion='off']) .flick {
+		animation: none;
 	}
 </style>

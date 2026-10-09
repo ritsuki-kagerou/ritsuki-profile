@@ -13,4 +13,4 @@
 
 {@render children()}
 
-<Crt />
+<Crt curvature noise />

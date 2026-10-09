@@ -249,3 +249,33 @@ test('theme: green by default, T cycles, remembered before first paint', async (
 
 	expect(messages).toEqual([]);
 });
+
+test('motion: on by default, M turns it off for crt-ui and the site, remembered', async ({
+	page
+}) => {
+	const messages = watchConsole(page);
+	const attr = () => page.evaluate(() => document.documentElement.dataset.crtMotion ?? 'on');
+
+	await page.goto('/?screen=menu');
+	const toggle = page.locator('.head__motion');
+	await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+	expect(await attr()).toBe('on');
+
+	await page.keyboard.press('m');
+	await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+	expect(await attr()).toBe('off');
+	await expect(page.locator('.crt__sweep')).toHaveCSS('display', 'none');
+	await expect(page.locator('.crt__noise')).toHaveCSS('animation-name', 'none');
+	await expect(page.locator('.head__audio')).toHaveCSS('animation-name', 'none');
+
+	// applied by the inline script in app.html, before the app hydrates
+	await page.reload({ waitUntil: 'domcontentloaded' });
+	expect(await attr()).toBe('off');
+	await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+
+	await toggle.click();
+	expect(await attr()).toBe('on');
+	expect(await page.evaluate(() => localStorage.getItem('rkos.motion'))).toBeNull();
+
+	expect(messages).toEqual([]);
+});
