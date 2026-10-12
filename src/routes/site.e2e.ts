@@ -31,7 +31,7 @@ test.describe('for crawlers', () => {
 
 	test('the boot page links to every screen', async ({ page }) => {
 		await page.goto('/');
-		await expect(page.locator('h1')).toHaveText(/full stack developer/i);
+		await expect(page.locator('h1')).toHaveText(/independent developer/i);
 		const index = page.getByRole('navigation', { name: 'Site index' });
 		await expect(index.locator('a[href="?screen=archive"]')).toHaveCount(1);
 		await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);

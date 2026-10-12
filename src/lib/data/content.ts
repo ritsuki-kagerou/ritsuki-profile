@@ -2,8 +2,9 @@ import portrait from '$lib/assets/portrait.webp';
 
 export const PROFILE = {
 	name: 'Ritsuki',
-	role: 'Full stack developer',
-	city: 'Malang',
+	role: 'Independent developer',
+	tagline: 'Understanding Systems. Building Software.',
+	city: 'East Java',
 	country: 'Indonesia',
 	timezone: 'UTC+07:00',
 	email: 'ritsuki.kagerou@gmail.com',
@@ -32,7 +33,7 @@ export const SYSTEM = {
 	wordmark: NAME,
 	manifest: `CARRIER ${NAME} // MANIFEST 001`,
 	footer: `${SYSTEM_UNIT} SERIES / PERSONAL BROADCAST UNIT`,
-	description: `${PROFILE.name} — ${PROFILE.role.toLowerCase()} in ${PROFILE.city}, ${PROFILE.country}. Backend, infrastructure and self-hosted systems. Open for freelance work.`,
+	description: `${PROFILE.name} — ${PROFILE.role.toLowerCase()} in ${PROFILE.city}, ${PROFILE.country}, exploring software, systems and ideas. Backend, infrastructure and self-hosted systems.`,
 	site: 'ritsuki.dev',
 	// search results show the title first: lead with who, then the terminal
 	heading: `${PROFILE.name} — ${PROFILE.role}`,
@@ -45,7 +46,7 @@ export const MENU: MenuEntry[] = [
 	{ id: 'identity', label: 'IDENTITY', blurb: 'Who is running this thing' },
 	{ id: 'capabilities', label: 'CAPABILITY MATRIX', blurb: 'Where the depth actually is' },
 	{ id: 'archive', label: 'WORK ARCHIVE', blurb: 'Systems built and kept running' },
-	{ id: 'transmission', label: 'TRANSMISSION', blurb: 'Open for freelance work' },
+	{ id: 'transmission', label: 'TRANSMISSION', blurb: 'Mail, code and other places' },
 	{ id: 'status', label: 'SYSTEM STATUS', blurb: 'How the work actually goes' }
 ];
 
@@ -74,19 +75,19 @@ export const IDENTITY = {
 		{ key: 'DESIGNATION', value: NAME },
 		{ key: 'ROLE', value: PROFILE.role.toUpperCase() },
 		{ key: 'BASE', value: BASE },
-		{ key: 'ACTIVE SINCE', value: '2026' },
+		{ key: 'ESTABLISHED', value: '2026' },
 		{ key: 'UPLINK', value: PROFILE.timezone },
-		{ key: 'STATUS', value: 'OPEN FOR CONTRACT', tone: 'ok' as const }
+		{ key: 'STATUS', value: 'BUILDING', tone: 'ok' as const }
 	],
 	body: [
-		'Full stack developer. Builds applications, APIs and the systems that carry them — then keeps them running. Most of the work is solo: architecture, implementation, deployment, and the maintenance nobody volunteers for.',
-		'Prefers to understand how a thing works before using it, then find the plainest way to make it work. Self-taught by habit — reads the source, traces a fault to its root, and distrusts complexity that exists only to look advanced. Would rather build the thing than sit in a meeting about building the thing.',
-		'Got here out of curiosity about how computers actually work. That has not changed; only the scale has. Code, then servers, then Linux, then the whole machine and how its parts talk to each other.'
+		`${PROFILE.tagline} Independent developer exploring software, systems, and ideas — turning concepts into working projects. Most projects are built solo, from architecture and implementation to deployment and the ongoing work of keeping things running.`,
+		'Prefers to understand how things work before using them, then find a simple way to make them work. Self-taught by habit — reads the source, traces problems to their roots, and values simplicity over unnecessary complexity. More interested in building something useful than making it look complicated.',
+		"I've always been curious about how computers work, from the code we write to the systems running underneath. That curiosity has led me through software development, Linux, self-hosting, and the infrastructure that connects everything."
 	],
 	marks: [
 		{ label: 'LINUX & SELF-HOSTING', detail: 'runs its own infrastructure' },
-		{ label: 'HOMELAB TINKERER', detail: 'production is a bigger homelab' },
-		{ label: 'CURIOUS BY DEFAULT', detail: 'reads the source, not the summary' }
+		{ label: 'HOMELAB TINKERER', detail: 'experiments locally, deploys deliberately' },
+		{ label: 'CURIOUS BY DEFAULT', detail: 'prefers understanding over assumptions' }
 	]
 };
 
@@ -117,7 +118,7 @@ export const CAPABILITIES: Capability[] = [
 	{
 		code: 'C-03',
 		label: 'DATABASE & DATA SYSTEMS',
-		spec: 'PostgreSQL as the spine, Valkey for cache, ClickHouse for analytics. Schema, indexing, access paths.',
+		spec: 'PostgreSQL for core data, Valkey for caching, ClickHouse for analytics. Schema design, indexing, and query optimization.',
 		tier: 'PRIMARY'
 	},
 	{
@@ -129,7 +130,7 @@ export const CAPABILITIES: Capability[] = [
 	{
 		code: 'C-05',
 		label: 'AUTOMATION & TROUBLESHOOTING',
-		spec: 'Automating repeat work, and reading errors until the real root cause surfaces — not the first symptom.',
+		spec: 'Task automation, log analysis, debugging, and systematic root-cause investigation.',
 		tier: 'PRIMARY'
 	},
 	{
@@ -281,8 +282,11 @@ export type TerminalCard = {
 	href: string;
 };
 
+export type ChannelIcon = 'mail' | 'github' | 'x' | 'steam';
+
 export type Channel = {
 	code: string;
+	icon: ChannelIcon;
 	label: string;
 	handle: string;
 	href: string;
@@ -291,12 +295,11 @@ export type Channel = {
 
 export const TRANSMISSION = {
 	title: 'TRANSMISSION',
-	intro: [
-		'Open for freelance work — backend, infrastructure, or the whole stack when it is better handled by one person who understands all of it. Mail is the fastest route; the other channels are open too.'
-	],
+	intro: ['Mail is the fastest route. Code lives on GitHub; shorter thoughts end up on X.'],
 	channels: [
 		{
 			code: 'TX-01',
+			icon: 'mail',
 			label: 'MAIL',
 			handle: PROFILE.email,
 			href: `mailto:${PROFILE.email}`,
@@ -304,6 +307,7 @@ export const TRANSMISSION = {
 		},
 		{
 			code: 'TX-02',
+			icon: 'github',
 			label: 'GITHUB',
 			handle: `@${PROFILE.github}`,
 			href: `https://github.com/${PROFILE.github}`,
@@ -311,6 +315,7 @@ export const TRANSMISSION = {
 		},
 		{
 			code: 'TX-03',
+			icon: 'x',
 			label: 'X',
 			handle: `@${PROFILE.x}`,
 			href: `https://x.com/${PROFILE.x}`,
@@ -323,6 +328,7 @@ export const TRANSMISSION = {
 		channels: [
 			{
 				code: 'OD-01',
+				icon: 'steam',
 				label: 'STEAM',
 				handle: '/id/_Ritsuki_',
 				href: 'https://steamcommunity.com/id/_Ritsuki_/',
@@ -330,13 +336,8 @@ export const TRANSMISSION = {
 			}
 		] satisfies Channel[]
 	},
-	terminal: {
-		label: 'TERMINAL CARD',
-		command: 'npx ritsuki',
-		note: 'The same manifest, printed in your shell.',
-		href: `https://github.com/${PROFILE.github}/ritsuki-card`
-	} as TerminalCard | null,
-	outro: `Based in ${PROFILE.city}, ${PROFILE.timezone}. Remote by default.`
+	terminal: null as TerminalCard | null,
+	outro: `Based in ${PROFILE.city}, ${PROFILE.timezone}.`
 };
 
 /* --- [5] SYSTEM STATUS ----------------------------------------------- */
@@ -344,7 +345,7 @@ export const TRANSMISSION = {
 export const STATUS = {
 	title: 'SYSTEM STATUS',
 	loopLabel: 'OPERATING LOOP',
-	loopNote: '06 RETURNS TO 01 — THAT IS THE WHOLE METHOD',
+	loopNote: '06 RETURNS TO 01 — REPEAT WITH WHAT YOU LEARNED',
 	stages: [
 		{ label: 'UNDERSTAND', note: 'read the source, not the summary' },
 		{ label: 'BUILD', note: 'smallest thing that can work' },
@@ -354,8 +355,8 @@ export const STATUS = {
 		{ label: 'OPTIMIZE', note: 'only once there are numbers' }
 	],
 	readouts: [
-		{ key: 'AVAILABILITY', value: 'OPEN — FREELANCE' },
-		{ key: 'WORK MODE', value: 'REMOTE / SOLO' },
+		{ key: 'CURRENT FOCUS', value: 'PILIH-IN / KEUANGAN' },
+		{ key: 'WORK MODE', value: 'SOLO' },
 		{ key: 'LOCATION', value: BASE },
 		{ key: 'TIMEZONE', value: PROFILE.timezone }
 	],
@@ -364,7 +365,7 @@ export const STATUS = {
 		{ key: 'COMPONENTS', value: '@RITSUKI.KAGEROU/CRT-UI' },
 		{ key: 'TYPEFACE', value: 'GEIST MONO / MARTIAN MONO' },
 		{ key: 'PALETTE', value: 'PHOSPHOR 4ADE80' },
-		{ key: 'VISUAL DEBT', value: 'NOSTROMO.DESIGN' }
+		{ key: 'DESIGN INFLUENCE', value: 'NOSTROMO.DESIGN' }
 	]
 };
 

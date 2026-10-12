@@ -39,7 +39,7 @@ export function personJsonLd(): string {
 		url: `${ORIGIN}/`,
 		address: {
 			'@type': 'PostalAddress',
-			addressLocality: PROFILE.city,
+			addressRegion: PROFILE.city,
 			addressCountry: PROFILE.country
 		},
 		sameAs

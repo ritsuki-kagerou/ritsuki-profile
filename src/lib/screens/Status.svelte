@@ -78,7 +78,8 @@
 		grid-template-columns: 2.5rem var(--rail) minmax(0, 11rem) minmax(0, 1fr);
 		gap: 1rem;
 		align-items: center;
-		padding-block: 0.28rem;
+		--pad: 0.28rem;
+		padding-block: var(--pad);
 		font-size: 0.95em;
 		letter-spacing: 0.1em;
 	}
@@ -100,8 +101,8 @@
 		content: '';
 		position: absolute;
 		left: 50%;
-		top: 0;
-		bottom: 0;
+		top: calc(var(--pad) * -1);
+		bottom: calc(var(--pad) * -1);
 		width: 1px;
 		translate: -0.5px 0;
 		background: var(--rule);
@@ -112,6 +113,11 @@
 
 	.stage:first-child .stage__rail::before {
 		top: 50%;
+	}
+
+	/* the last stage hands the line down to the return elbow */
+	.stage:last-child .stage__rail::before {
+		bottom: calc(var(--pad) * -1);
 	}
 
 	.stage__node {
@@ -242,7 +248,7 @@
 			grid-template-columns: 2.2rem var(--rail) minmax(0, 1fr);
 			gap: 0.15rem 0.7rem;
 			align-items: baseline;
-			padding-block: 0.4rem;
+			--pad: 0.4rem;
 		}
 		.stage__rail {
 			grid-row: 1 / span 2;

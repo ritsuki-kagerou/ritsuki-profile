@@ -2,6 +2,7 @@
 	import type { Channel } from '$lib/data/content';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
 	import { audio } from '$lib/audio.svelte';
+	import ChannelIcon from './ChannelIcon.svelte';
 
 	type Props = { channel: Channel; delay?: number; muted?: boolean };
 	let { channel, delay = 0, muted = false }: Props = $props();
@@ -17,7 +18,7 @@
 	rel={external ? 'me noopener noreferrer' : undefined}
 	onclick={audio.select}
 >
-	<span class="ch__code u-dim">{channel.code}</span>
+	<span class="ch__icon"><ChannelIcon name={channel.icon} /></span>
 	<span class="ch__label">
 		<Typed text={channel.label} speed={18} {delay} ontick={audio.type} />
 	</span>
@@ -29,7 +30,7 @@
 <style>
 	.ch {
 		display: grid;
-		grid-template-columns: 5rem minmax(8rem, 14rem) minmax(0, 1fr) minmax(0, auto) 1.5rem;
+		grid-template-columns: 1.5rem minmax(8rem, 14rem) minmax(0, 1fr) minmax(0, auto) 1.5rem;
 		gap: 1rem;
 		align-items: baseline;
 		padding: 0.85rem 0.9rem;
@@ -55,7 +56,11 @@
 		opacity: 1;
 	}
 
-	.ch__code,
+	.ch__icon {
+		align-self: center;
+		color: var(--phos);
+	}
+
 	.ch__note {
 		font-size: 0.85em;
 		letter-spacing: 0.12em;
@@ -90,7 +95,7 @@
 
 	@media (max-width: 860px) {
 		.ch {
-			grid-template-columns: 4.5rem minmax(0, 1fr) 1.2rem;
+			grid-template-columns: 1.5rem minmax(0, 1fr) 1.2rem;
 		}
 		.ch__handle {
 			grid-column: 2;
