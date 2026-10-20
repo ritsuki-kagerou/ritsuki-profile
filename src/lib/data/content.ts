@@ -171,6 +171,10 @@ export type ArchiveEntry = {
 	metrics: { key: string; value: string }[];
 	/** A live demo or docs site. Omit when there is nothing public to open. */
 	href?: string;
+	/** Heading above the link. Defaults to the live-demo label; set it for a source repo. */
+	hrefLabel?: string;
+	/** Link text. Defaults to the URL without its scheme; set it when that is too long for the side column. */
+	hrefText?: string;
 };
 
 export const ARCHIVE: ArchiveEntry[] = [
@@ -273,6 +277,30 @@ export const ARCHIVE: ArchiveEntry[] = [
 			{ key: 'HYDRATION', value: 'TESTED IN CI' }
 		],
 		href: 'https://crt-ui.ritsuki.dev'
+	},
+	{
+		id: 'reels-control-bar',
+		code: 'AR-06',
+		title: 'REELS CONTROL BAR — CHROME EXTENSION',
+		year: 'OCT 2026',
+		role: 'EXTENSION, SOLO',
+		status: 'ACTIVE',
+		summary:
+			'A media-player control bar, keyboard shortcuts and playback speed for Instagram Reels.',
+		body: [
+			'It started as a small annoyance. Saved reels on desktop can run long, yet Instagram offers no way to speed them up, and one wrong click sends you back to the start to watch it all again.',
+			'A Manifest V3 Chrome extension that gives Reels the controls a video player has always had: a seek bar, play and pause, a speed menu from 0.5x to 2x that is remembered across reels, and an auto-next switch. The bar has no background, so the video stays fully visible, and it hides itself when the mouse stops moving.',
+			'Everything is also on the keyboard: play, seek five seconds either way, next and previous reel, mute, speed up and down. Unmuting once carries over to the next reel instead of starting silent every time. It runs only on instagram.com, keeps its settings in your browser and sends nothing to any server.'
+		],
+		stack: ['JAVASCRIPT', 'MANIFEST V3', 'SHADOW DOM', 'CHROME STORAGE'],
+		metrics: [
+			{ key: 'SPEED RANGE', value: '0.5X – 2X' },
+			{ key: 'SHORTCUTS', value: '10 KEYS' },
+			{ key: 'DATA SENT', value: 'NONE' }
+		],
+		href: 'https://github.com/ritsuki-kagerou/reels-control-bar',
+		hrefLabel: 'SOURCE ON GITHUB',
+		hrefText: 'reels-control-bar'
 	}
 ];
 
