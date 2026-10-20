@@ -175,23 +175,26 @@ export type ArchiveEntry = {
 
 export const ARCHIVE: ArchiveEntry[] = [
 	{
-		id: 'pilih-in',
+		id: 'dochi-vote',
 		code: 'AR-01',
-		title: 'PILIH-IN — VOTING PLATFORM',
-		year: 'SEP 2026',
+		title: 'DOCHI VOTE — VOTING PLATFORM',
+		year: 'OCT 2026',
 		role: 'FULL STACK, SOLO',
 		status: 'ACTIVE',
-		summary: 'Vote, compare, rank, argue — a public platform for Indonesian users.',
+		summary:
+			'Vote, compare, argue — a public voting platform for Indonesian users, live at vote.dochi.id.',
 		body: [
-			'A voting, comparison and ranking platform: see a question, vote, see the result, read the argument, add to it. SvelteKit on the surface, Go and Gin behind it, PostgreSQL and Valkey underneath, and Garage for S3-compatible image storage.',
-			'One rule shapes the whole codebase — the server is authoritative, and no vote, identity or count is ever trusted from the client. Architectural decisions are written down before they are coded, and the documentation carries a hard size budget enforced by make: exceed it and you cut or merge, you do not raise the number.'
+			'A voting and comparison platform: see a question, vote, see the result, read the argument, add to it. Authors can attach images and a colour to each side, and a moderation queue keeps reported content in check. SvelteKit on the surface, Go and Gin behind it, PostgreSQL and Valkey underneath, with images stored on Cloudflare R2.',
+			'Built for Indonesians who like to pick a side, from everyday either-or questions to head-to-head matchups. You can vote without an account, and signing up later keeps everything you already voted on. Results appear once you have voted, so nobody just follows the crowd, and every comparison comes with a thread to argue it out.',
+			'Made to be easy to start and hard to cheat: one person gets one vote, and the numbers you see are always counted on the server. Reported content goes to a moderation queue. It is live at vote.dochi.id, part of the dochi.id family.'
 		],
-		stack: ['GO', 'GIN', 'SVELTEKIT', 'POSTGRESQL', 'VALKEY'],
+		stack: ['GO', 'GIN', 'SVELTEKIT', 'POSTGRESQL', 'VALKEY', 'CLOUDFLARE R2'],
 		metrics: [
 			{ key: 'SERVICES', value: '6 IN COMPOSE' },
 			{ key: 'CREW', value: 'SOLO' },
-			{ key: 'STATE', value: 'PRE-LAUNCH' }
-		]
+			{ key: 'STATE', value: 'LIVE' }
+		],
+		href: 'https://vote.dochi.id'
 	},
 	{
 		id: 'keuangan',
@@ -355,7 +358,7 @@ export const STATUS = {
 		{ label: 'OPTIMIZE', note: 'only once there are numbers' }
 	],
 	readouts: [
-		{ key: 'CURRENT FOCUS', value: 'PILIH-IN / KEUANGAN' },
+		{ key: 'CURRENT FOCUS', value: 'DOCHI VOTE / KEUANGAN' },
 		{ key: 'WORK MODE', value: 'SOLO' },
 		{ key: 'LOCATION', value: BASE },
 		{ key: 'TIMEZONE', value: PROFILE.timezone }

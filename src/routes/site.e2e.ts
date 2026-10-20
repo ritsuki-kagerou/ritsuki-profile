@@ -81,7 +81,7 @@ test.describe('for crawlers', () => {
 		const xml = await res.text();
 		expect(xml).toContain('<loc>https://ritsuki.dev/</loc>');
 		expect(xml).toContain('<loc>https://ritsuki.dev/?screen=status</loc>');
-		expect(xml).toContain('<loc>https://ritsuki.dev/?screen=archive&amp;entry=pilih-in</loc>');
+		expect(xml).toContain('<loc>https://ritsuki.dev/?screen=archive&amp;entry=dochi-vote</loc>');
 	});
 });
 
