@@ -301,6 +301,50 @@ export const ARCHIVE: ArchiveEntry[] = [
 		href: 'https://github.com/ritsuki-kagerou/reels-control-bar',
 		hrefLabel: 'SOURCE ON GITHUB',
 		hrefText: 'reels-control-bar'
+	},
+	{
+		id: 'dochi-kotoba',
+		code: 'AR-07',
+		title: 'DOCHI KOTOBA — JAPANESE STUDY PWA',
+		year: 'NOV 2026',
+		role: 'FULL STACK, SOLO',
+		status: 'ACTIVE',
+		summary:
+			'A free, ad-free Japanese study app for Indonesian learners, starting from hiragana. Live at kotoba.dochi.id.',
+		body: [
+			'A study app that begins with hiragana, one row at a time, with a quiz closing each row and a practice mode that never touches the schedule. Katakana comes next, then the road continues step by step toward N1. Every lesson note is written from scratch, in Indonesian.',
+			'Guest first: everything works without an account, progress lives in IndexedDB, and the app keeps working offline as an installable PWA. Signing in with Google only adds sync, and whatever a guest already studied is merged into the account.',
+			'Progress is an append-only log of answers with IDs made on the client. Card state is computed from that log in the browser with FSRS, so merging two devices is just the union of two sets and can never conflict. The server only stores and syncs the log, serialised per account with a Postgres advisory lock — there is a concurrency test proving entries slip through without it.'
+		],
+		stack: ['SVELTEKIT', 'TYPESCRIPT', 'POSTGRESQL', 'INDEXEDDB', 'FSRS', 'PWA'],
+		metrics: [
+			{ key: 'TESTS', value: 'UNIT / DB / E2E' },
+			{ key: 'OFFLINE', value: 'INSTALLABLE PWA' },
+			{ key: 'STATE', value: 'LIVE' }
+		],
+		href: 'https://kotoba.dochi.id'
+	},
+	{
+		id: 'sewa-pakdhe',
+		code: 'AR-08',
+		title: 'SEWA PAKDHE — RENTAL LISTINGS',
+		year: 'NOV 2026',
+		role: 'FULL STACK, SOLO',
+		status: 'ACTIVE',
+		summary:
+			'Listings and a management panel for boarding rooms and rental houses, live at sewa.pakdhe.id.',
+		body: [
+			'A public site for an owner-run set of boarding rooms and rental houses: filter by type and price, open a listing with photos and a map, and message the owner on WhatsApp in one tap. Behind it sits a panel where the owner manages properties, unit types, prices and photos, while a caretaker can only change room status at the properties assigned to them.',
+			'Go and Gin with pgx and sqlc behind SvelteKit, which acts as a BFF so the browser never talks to the API directly. The API is spec-first: one OpenAPI file generates both the Go handlers and the TypeScript client. Permissions are enforced in the backend rather than hidden in the UI, and every change to prices, status, photos or accounts lands in an audit table.',
+			'Photos come straight from a phone camera, are shrunk to two WebP sizes in the browser before upload, checked again on the server, and stored on Cloudflare R2. Deleting a photo, a type or a property takes its files with it.'
+		],
+		stack: ['GO', 'GIN', 'SQLC', 'OPENAPI', 'SVELTEKIT', 'POSTGRESQL', 'CLOUDFLARE R2'],
+		metrics: [
+			{ key: 'ROLES', value: 'OWNER / CARETAKER' },
+			{ key: 'API', value: 'SPEC-FIRST' },
+			{ key: 'STATE', value: 'LIVE' }
+		],
+		href: 'https://sewa.pakdhe.id'
 	}
 ];
 
