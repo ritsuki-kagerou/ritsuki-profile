@@ -1,4 +1,4 @@
-import portrait from '$lib/assets/portrait.webp';
+import portrait from '#lib/assets/portrait.webp';
 
 export const PROFILE = {
 	name: 'Ritsuki',

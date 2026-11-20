@@ -41,7 +41,7 @@
  *    in. The level is set once, on the master bus — see `LEVEL`.
  */
 
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 
 const STORAGE_KEY = 'rkos.audio';
 

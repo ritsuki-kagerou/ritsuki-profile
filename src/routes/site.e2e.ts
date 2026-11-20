@@ -198,6 +198,8 @@ test('beacons blink a few times, then stop', async ({ page }) => {
 
 	// once per page load: coming back to the menu does not blink again
 	await page.keyboard.press('1');
+	// wait for the navigation to land, or Escape still sees the menu and does nothing
+	await expect(page).toHaveURL(/screen=identity/);
 	await page.keyboard.press('Escape');
 	await expect(page).toHaveURL(/screen=menu/);
 	await expect(toggle).not.toHaveClass(/u-beacon/);

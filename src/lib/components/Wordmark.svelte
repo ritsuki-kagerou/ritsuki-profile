@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SYSTEM } from '$lib/data/content';
+	import { SYSTEM } from '#lib/data/content.ts';
 </script>
 
 <div class="mark">

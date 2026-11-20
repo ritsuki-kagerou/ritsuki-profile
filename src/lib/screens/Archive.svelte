@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ARCHIVE, UI } from '$lib/data/content';
+	import { ARCHIVE, UI } from '#lib/data/content.ts';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
-	import { isPlainClick } from '$lib/links';
+	import { audio } from '#lib/audio.svelte.ts';
+	import { isPlainClick } from '#lib/links.ts';
 
 	type Props = {
 		entryId: string | null;

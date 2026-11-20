@@ -8,7 +8,7 @@
  * mirrors that state for the UI and changes it on request.
  */
 
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 
 export const THEMES = ['green', 'amber', 'white'] as const;
 export type Theme = (typeof THEMES)[number];

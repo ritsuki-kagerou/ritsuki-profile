@@ -1,4 +1,4 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
 
 // Headers the CSP in vite.config.ts does not cover. HSTS lives at Cloudflare.
 const HEADERS: Record<string, string> = {

@@ -1,4 +1,4 @@
-import { ORIGIN, sitemapPaths } from '$lib/seo';
+import { ORIGIN, sitemapPaths } from '#lib/seo.ts';
 
 export const prerender = true;
 

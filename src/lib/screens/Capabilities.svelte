@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { CAPABILITIES, TOOLCHAIN, UI, type Tier } from '$lib/data/content';
+	import { CAPABILITIES, TOOLCHAIN, UI, type Tier } from '#lib/data/content.ts';
 	import { Meter, Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
+	import { audio } from '#lib/audio.svelte.ts';
 
 	const FILL: Record<Tier, number> = {
 		PRIMARY: 1,

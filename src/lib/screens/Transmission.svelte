@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { TRANSMISSION, UI } from '$lib/data/content';
-	import ChannelRow from '$lib/components/ChannelRow.svelte';
+	import { TRANSMISSION, UI } from '#lib/data/content.ts';
+	import ChannelRow from '#lib/components/ChannelRow.svelte';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
+	import { audio } from '#lib/audio.svelte.ts';
 
 	let root = $state<HTMLDivElement | null>(null);
 

@@ -1,6 +1,6 @@
 # RITSUKI - Personal Terminal
 
-Personal site as a retro CRT terminal (`RK/OS 9000`), built with SvelteKit 2 + Svelte 5 (runes) + TypeScript. Inspired by the terminals in Fallout 4 - see [Inspiration](#inspiration).
+Personal site as a retro CRT terminal (`RK/OS 9000`), built with SvelteKit 3 + Svelte 5 (runes) + TypeScript. Inspired by the terminals in Fallout 4 - see [Inspiration](#inspiration).
 
 All copy lives in `src/lib/data/content.ts` - components never hold text.
 

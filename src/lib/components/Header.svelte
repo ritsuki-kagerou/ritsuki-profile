@@ -3,11 +3,11 @@
 </script>
 
 <script lang="ts">
-	import { SYSTEM, UI } from '$lib/data/content';
+	import { SYSTEM, UI } from '#lib/data/content.ts';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
-	import { motion } from '$lib/motion.svelte';
-	import { theme } from '$lib/theme.svelte';
+	import { audio } from '#lib/audio.svelte.ts';
+	import { motion } from '#lib/motion.svelte.ts';
+	import { theme } from '#lib/theme.svelte.ts';
 	import Wordmark from './Wordmark.svelte';
 
 	let hint = $state(false);

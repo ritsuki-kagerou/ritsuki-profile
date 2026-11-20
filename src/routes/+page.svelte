@@ -2,26 +2,33 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 
-	import { ARCHIVE, BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '$lib/data/content';
+	import { ARCHIVE, BOOT_LINES, MENU, SYSTEM, UI, type ScreenId } from '#lib/data/content.ts';
 	import { Boot, ScreenFrame, Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
-	import { motion } from '$lib/motion.svelte';
-	import { theme } from '$lib/theme.svelte';
-	import { ORIGIN, canonicalPath, personJsonLd } from '$lib/seo';
+	import { audio } from '#lib/audio.svelte.ts';
+	import { motion } from '#lib/motion.svelte.ts';
+	import { theme } from '#lib/theme.svelte.ts';
+	import { ORIGIN, canonicalPath, personJsonLd } from '#lib/seo.ts';
 
-	import Header from '$lib/components/Header.svelte';
-	import Menu from '$lib/components/Menu.svelte';
+	import Header from '#lib/components/Header.svelte';
+	import Menu from '#lib/components/Menu.svelte';
 
-	import Identity from '$lib/screens/Identity.svelte';
-	import Capabilities from '$lib/screens/Capabilities.svelte';
-	import Archive from '$lib/screens/Archive.svelte';
-	import Transmission from '$lib/screens/Transmission.svelte';
-	import Status from '$lib/screens/Status.svelte';
+	import Identity from '#lib/screens/Identity.svelte';
+	import Capabilities from '#lib/screens/Capabilities.svelte';
+	import Archive from '#lib/screens/Archive.svelte';
+	import Transmission from '#lib/screens/Transmission.svelte';
+	import Status from '#lib/screens/Status.svelte';
 
 	const IDS = MENU.map((m) => m.id);
 
-	let screenParam = $derived(page.url.searchParams.get('screen'));
-	let entryParam = $derived(page.url.searchParams.get('entry'));
+	// Kit 3 updates page.url only once goto() settles, so a key pressed right
+	// after another (1 then Esc) would still see the old screen. The pending
+	// query answers for the screen being navigated to until page.url catches up.
+	let pending = $state<URLSearchParams | null>(null);
+	let pendingId = 0;
+	let params = $derived(pending ?? page.url.searchParams);
+
+	let screenParam = $derived(params.get('screen'));
+	let entryParam = $derived(params.get('entry'));
 
 	let current = $derived(IDS.includes(screenParam as ScreenId) ? (screenParam as ScreenId) : null);
 
@@ -60,7 +67,11 @@
 	let canonical = $derived(ORIGIN + canonicalPath(screenParam, entryParam));
 
 	function navigate(query: string) {
-		goto(`?${query}`, { noScroll: true, keepFocus: true });
+		const id = ++pendingId;
+		pending = new URLSearchParams(query);
+		goto(`?${query}`, { reset: false }).finally(() => {
+			if (id === pendingId) pending = null;
+		});
 	}
 
 	function open(id: ScreenId) {

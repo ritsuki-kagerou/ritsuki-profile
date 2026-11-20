@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { MENU, type ScreenId } from '$lib/data/content';
+	import { MENU, type ScreenId } from '#lib/data/content.ts';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
-	import { isPlainClick } from '$lib/links';
+	import { audio } from '#lib/audio.svelte.ts';
+	import { isPlainClick } from '#lib/links.ts';
 
 	type Props = {
 		selected: number;

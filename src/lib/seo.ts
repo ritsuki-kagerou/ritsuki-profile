@@ -1,4 +1,4 @@
-import { ARCHIVE, MENU, PROFILE, SYSTEM, TRANSMISSION } from '$lib/data/content';
+import { ARCHIVE, MENU, PROFILE, SYSTEM, TRANSMISSION } from '#lib/data/content.ts';
 
 /** Fixed, so canonical URLs never depend on how the request reached the server. */
 export const ORIGIN = `https://${SYSTEM.site}`;

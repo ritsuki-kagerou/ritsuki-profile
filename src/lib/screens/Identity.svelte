@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { IDENTITY } from '$lib/data/content';
+	import { IDENTITY } from '#lib/data/content.ts';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
+	import { audio } from '#lib/audio.svelte.ts';
 </script>
 
 <div class="id">

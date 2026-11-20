@@ -10,7 +10,7 @@
  * module only mirrors that state for the UI and changes it on request.
  */
 
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 
 /** Keep in sync with the inline script in app.html. */
 const STORAGE_KEY = 'rkos.motion';

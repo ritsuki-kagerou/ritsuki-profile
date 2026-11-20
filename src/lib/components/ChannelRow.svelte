@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Channel } from '$lib/data/content';
+	import type { Channel } from '#lib/data/content.ts';
 	import { Typed } from '@ritsuki.kagerou/crt-ui';
-	import { audio } from '$lib/audio.svelte';
+	import { audio } from '#lib/audio.svelte.ts';
 	import ChannelIcon from './ChannelIcon.svelte';
 
 	type Props = { channel: Channel; delay?: number; muted?: boolean };

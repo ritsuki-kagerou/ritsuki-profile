@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ChannelIcon } from '$lib/data/content';
+	import type { ChannelIcon } from '#lib/data/content.ts';
 
 	type Props = { name: ChannelIcon };
 	let { name }: Props = $props();
